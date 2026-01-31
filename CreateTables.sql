@@ -10,8 +10,6 @@ Purpose: Defines the normalized database schema (DDL) for the NextUp project.
 Original work. No AI or external resources were used.
 */
 
--- find a way to constrain so you have either a mediaItemID or sportsEventID but not both
-
 -- Wrapper recommended in the instructions
 set FOREIGN_KEY_CHECKS = 0;
 set AUTOCOMMIT = 0; 
