@@ -1,0 +1,122 @@
+<!--
+CS 340 – Introduction to Databases
+Project Step 3 Draft – Design UI Interface + DML SQL
+Project: NextUp – A One-Stop Media Tracker
+Group 11: Julia Reynolds, Stephen Stanwood
+
+File: media-items.hbs
+
+Original work. No AI or external resources were used.
+-->
+
+<h1>Media Items</h1>
+<p><a href="/">Back to Index</a></p>
+
+<h2>Browse Media Items (SELECT)</h2>
+    <table border="1" cellpadding="6">
+        <thead>
+            <tr>
+                <th>mediaItemID</th>
+                <th>mediaType</th>
+                <th>title</th>
+                <th>releaseDate</th>
+                <th>runtimeMins</th>
+                <th>creator</th>
+                <th>platform</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>BOOK</td>
+                <td>Football</td>
+                <td>2026-01-20</td>
+                <td>N/A</td>
+                <td>Chuck Klosterman</td>
+                <td>Print</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>SHOW</td>
+                <td>The Leftovers</td>
+                <td>2014-06-29</td>
+                <td>52</td>
+                <td>Damon Lindelof & Tom Perrotta</td>
+                <td>HBO</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>MOVIE</td>
+                <td>A Ghost Story</td>
+                <td>2017-07-07</td>
+                <td>92</td>
+                <td>David Lowery</td>
+                <td>Prime Video</td>
+            </tr>
+        </tbody>
+    </table>
+
+<h2>Add Media Item (INSERT)</h2>
+<form>
+    <label>Media Type:
+        <select name="mediaType">
+            <option value="MOVIE">MOVIE</option>
+            <option value="SHOW">SHOW</option>
+            <option value="BOOK">BOOK</option>
+        </select>
+    </label><br>
+    <label>Title:
+        <input type="text" name="title">
+    </label><br>
+    <label>Release Date:
+        <input type="datetime-local" name="releaseDate">
+    </label><br>
+    <label>Runtime (mins):
+        <input type="number" name="runtimeMins">
+    </label><br>
+    <label>Creator:
+        <input type="text" name="creator">
+    </label><br>
+    <label>Platform:
+        <input type="text" name="platform">
+    </label><br>
+    <button type="submit">Add Media Item</button>
+</form>
+
+<h2>Update Media Item (UPDATE)</h2>
+<form>
+    <label>Media Item ID:
+        <input type="number" name="mediaItemID">
+    </label><br>
+    <label>Media Type:
+        <select name="mediaType">
+            <option value="MOVIE">MOVIE</option>
+            <option value="SHOW">SHOW</option>
+            <option value="BOOK">BOOK</option>
+        </select>
+    </label><br>
+    <label>Title:
+        <input type="text" name="title">
+    </label><br>
+    <label>Release Date:
+        <input type="datetime-local" name="releaseDate">
+    </label><br>
+    <label>Runtime (mins):
+        <input type="number" name="runtimeMins">
+    </label><br>
+    <label>Creator:
+        <input type="text" name="creator">
+    </label><br>
+    <label>Platform:
+        <input type="text" name="platform">
+    </label><br>
+    <button type="submit">Update Media Item</button>
+</form>
+
+<h2>Delete Media Item (DELETE)</h2>
+<form>
+    <label>Media Item ID:
+        <input type="number" name="mediaItemID">
+    </label><br>
+    <button type="submit">Delete Media Item</button>
+</form>
