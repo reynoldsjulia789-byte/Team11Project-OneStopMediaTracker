@@ -6,3 +6,7 @@ Team 11
 In 2026, we have basically unlimited options of what to watch, read, and follow at all times. The problem is no longer having something to do—it's keeping tabs on all of our possible entertainment options and picking the right one at the right time. Various tracking apps have sprung up for different categories of media: Letterboxd for movies, GoodReads for books, etc. But why should consumers have to split their attention across multiple interfaces and accounts just to keep tabs on what's going on? We need a one-stop shop where people can answer the question, "What should I do right now?"
 
 Our website and database will serve as the backend support for a consumer-facing app for roughly five hundred users, each of whom will maintain a library of roughly twenty items and make approximately ten updates to their lists per week. Our overall goal is to delight users with entertainment options by letting them skip the hassle of deciding what to do next.
+
+## Figma UI Design Ideas
+[Project Document](https://www.figma.com/design/THBJkFer16zI4sZ4cB4KrT/One-Stop-Media-Tracker?node-id=0-1&t=IxSmPaDPxCnHkOaD-1)\
+[Interactive Pototype](https://www.figma.com/proto/THBJkFer16zI4sZ4cB4KrT/One-Stop-Media-Tracker?page-id=0%3A1&node-id=4-34&p=f&viewport=-686%2C269%2C0.28&t=KUXCnJW8XPaRu1lv-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=4%3A34)
