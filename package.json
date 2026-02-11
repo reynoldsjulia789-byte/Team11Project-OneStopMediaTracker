@@ -1,0 +1,25 @@
+{
+  "name": "team11project-onestopmediatracker",
+  "version": "1.0.0",
+  "description": "Course Project for CS 340 - Intro to Databases\\ Team 11",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reynoldsjulia789-byte/Team11Project-OneStopMediaTracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/reynoldsjulia789-byte/Team11Project-OneStopMediaTracker/issues"
+  },
+  "homepage": "https://github.com/reynoldsjulia789-byte/Team11Project-OneStopMediaTracker#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "express-handlebars": "^8.0.5"
+  }
+}

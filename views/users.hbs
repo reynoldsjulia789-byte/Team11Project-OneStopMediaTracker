@@ -1,0 +1,75 @@
+<!--
+CS 340 – Introduction to Databases
+Project Step 3 Draft – Design UI Interface + DML SQL
+Project: NextUp – A One-Stop Media Tracker
+Group 11: Julia Reynolds, Stephen Stanwood
+
+File: users.hbs
+
+Original work. No AI or external resources were used.
+-->
+
+<h1>Users</h1>
+<p><a href="/">Back to Index</a></p>
+
+<h2>Browse Users (SELECT)</h2>
+
+    <table border="1" cellpadding="6">
+        <thead>
+            <tr>
+                <th>userID</th>
+                <th>username</th>
+                <th>email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>julia</td>
+                <td>julia@nextup.dev</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>stephen</td>
+                <td>stephen@nextup.dev</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>soph</td>
+                <td>soph@nextup.dev</td>
+            </tr>
+        </tbody>
+    </table>
+
+<h2>Add User (INSERT)</h2>
+<form>
+    <label>Username:
+        <input type="text" name="username">
+    </label><br>
+    <label>Email:
+        <input type="email" name="email">
+    </label><br>
+    <button type="submit">Add User</button>
+</form>
+
+<h2>Update User (UPDATE)</h2>
+<form>
+    <label>User ID:
+        <input type="number" name="userID">
+    </label><br>
+    <label>Username:
+        <input type="text" name="username">
+    </label><br>
+    <label>Email:
+        <input type="email" name="email">
+    </label><br>
+    <button type="submit">Update User</button>
+</form>
+
+<h2>Delete User (DELETE)</h2>
+<form>
+    <label>User ID:
+        <input type="number" name="userID">
+    </label><br>
+    <button type="submit">Delete User</button>
+</form>
