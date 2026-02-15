@@ -14,8 +14,46 @@ Original work. No AI or external resources were used.
 <head>
   <meta charset="UTF-8">
   <title>NextUp</title>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Fonts from Google Fonts (MuseoModerno) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
 </head>
 <body>
-  {{{body}}}
+  <header>
+    <div id="webHeader">
+      <div id="headerInnerFrame">
+        <h1 id="siteName">NextUp: A One-Stop Media Tracker</h1>
+        <h1 id="role">Admin</h1>
+      </div>
+    </div>
+
+    <nav id="navbar">
+        <li class="navButton">
+          <a class="navLink" href="/users">Users</a>
+        </li>
+
+        <li class="navButton">
+          <a class="navLink" href="/tracker-entries">User Tracking</a>
+        </li>
+
+        <li class="navButton">
+          <a class="navLink" href="/media-items">Media Items</a>
+        </li>
+
+        <li class="navButton">
+          <a class="navLink" href="/sports-events">Sports Events</a>
+        </li>
+    </nav>
+  </header>
+  
+  <main id="content">
+    {{{body}}}
+  </main>
 </body>
 </html>
