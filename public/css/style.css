@@ -1,0 +1,208 @@
+/*
+    CS 340 – Introduction to Databases
+    Project Step 3 Draft – Design UI Interface + DML SQL
+    Project: NextUp – A One-Stop Media Tracker
+    Group 11: Julia Reynolds, Stephen Stanwood
+
+    File: style.css
+
+    Original work. No AI used.
+    Designed in Figma. Used Figma DevMode to get CSS as a starting point.
+*/
+
+/* Color variables */
+:root
+{
+    /* Greyscale Colors */
+    --Lightest-Grey:        #D7D8DB;
+    --Second-Lightest-Grey: #BCBEC2;
+    --Third-Lightest-Grey:  #797D86;
+    --Fourth-Darkest-Grey:  #3D3F43;
+    --Third-Darkest-Grey:   #1D1E20;
+    --Second-Darkest-Grey:  #18191B;
+    --Darkest-Grey:         #131415;
+
+    /* Colors */
+    --Color1:               #A6F3A6;
+    --Color2:               #00BD6B;
+    --Color3:               #00BDA1;
+    --Color4:               #0B98F1;
+
+    /* Font Sizes */
+    --Smallest-Font-Size:           10px;
+    --Second-Smallest-Font-Size:    12px;
+    --Third-Smallest-Font-Size:     14px;
+    --Medium-Font-Size:             16px;
+    --Third-Largest-Font-Size:      20px;
+    --Second-Largest-Font-Size:     24px;
+    --Largest-Font-Size:            48px;
+
+    /* Font */
+    font-family:            MuseoModerno;
+    color:                  var(--Second-Lightest-Grey);
+
+    /* Set Background */
+    background:             var(--Darkest-Grey);
+}
+
+/* Remove default padding around body */
+body
+{
+    margin: 0;
+    padding: 0;
+}
+
+/* Web header styles */
+#webHeader
+{
+    /* layout */
+    display:            flex;
+    flex-direction:     column;
+    align-items:        flex-start;
+    align-self:         stretch;
+    position:           sticky;
+    top:                0;           
+    z-index:            1000;
+}
+
+#headerInnerFrame
+{
+    /* layout */
+    display:            flex;
+    padding-inline:     10px;
+    justify-content:    space-between;
+    align-items:        center;
+    align-self:         stretch;
+
+    /* style */
+    border-bottom:      1px solid var(--Third-Lightest-Grey);
+    background:         var(--Darkest-Grey);
+}
+
+#siteName
+{
+    color:              var(--Lightest-Grey);
+    font-size:          var(--Third-Largest-Font-Size);
+    font-style:         normal;
+    font-weight:        400;
+    line-height:        1;
+    text-decoration:    none;
+}
+
+#role
+{
+    color:          var(--Color3);
+    font-size:      var(--Third-Largest-Font-Size);
+    font-style:     normal;
+    font-weight:    400;
+    line-height:    1;
+}
+
+/* Nav Bar */
+.navbar
+{
+    /* layout */
+    display:            flex;
+    padding:            10px 10px 0 10px;
+    align-items:        flex-start;
+    gap:                10px;
+    align-self:         stretch;
+
+    /* style */
+    background:         var(--Second-Darkest-Grey);
+}
+
+.navButton
+{
+    /* layout */
+    display:            flex;
+    padding:            10px 10px;
+    flex-direction:     column;
+    justify-content:    center;
+    align-items:        center;
+    gap:                10px;
+
+    /* style */
+    border-radius:      20px 12px 0 0;
+}
+
+.navLink
+{
+    /* layout */
+    display:            -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    align-self:         stretch;
+
+    /* typography */
+    overflow:           hidden;
+    color:              var(--Third-Lightest-Grey);
+    text-overflow:      ellipsis;
+    font-size:          var(--Third-Smallest-Font-Size);
+    font-style:         normal;
+    font-weight:        400;
+    line-height:        1;
+    text-decoration:    none;
+}
+
+#currentPage
+{
+    /* layout */
+    display:            flex;
+    padding:            10px 25px;
+    flex-direction:     column;
+    justify-content:    center;
+    align-items:        center;
+    gap:                10px;
+
+    /* style */
+    border-radius:      20px 20px 0 0;
+    background:         var(--Darkest-Grey);
+}
+
+#currentPageTitle
+{
+    color: var(--Fourth-Darkest-Grey);
+}
+
+/* Main Content View Area */
+.mainView
+{
+    /* layout */
+    display:            flex;
+    padding:            10px;
+    flex-direction:     column;
+    justify-content:    center;
+    align-items:        center;
+    gap:                10px;
+    flex:               1 0 0;
+    align-self:         stretch;
+}
+
+p.startPage
+{
+    color:              var(--Fourth-Darkest-Grey);
+    font-size:          var(--Second-Largest-Font-Size);
+    font-style:         normal;
+    font-weight:        300;
+    line-height:        normal;
+}
+
+/* Table Styles */
+.tableName
+{
+    /* layout */
+    display:        flex;
+    /* width:          982px; */
+    align-items:    center;
+    gap:            10px;
+
+    /* typography */
+    color:          var(--Fourth-Darkest-Grey);
+    leading-trim:   both;
+    text-edge:      cap;
+    font-size:      var(--Largest-Font-Size);
+    font-style:     normal;
+    font-weight:    300;
+    line-height:    normal;
+}

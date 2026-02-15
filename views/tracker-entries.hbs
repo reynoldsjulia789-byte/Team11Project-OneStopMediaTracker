@@ -9,10 +9,39 @@ File: tracker-entries.hbs
 Original work. No AI or external resources were used.
 -->
 
-<h1>User Tracker Entries</h1>
-<p><a href="/">Back to Index</a></p>
+<!-- Nav Bar -->
+<header id="webHeader">
+    <div id="headerInnerFrame">
+      <a id="siteName" href="/">NextUp: A One-Stop Media Tracker</a>
+      <h1 id="role">Admin</h1>
+    </div>
 
-<h2>Browse User Tracker Entries (SELECT)</h2>
+    <nav class="navbar">
+        <li class="navButton">
+            <a class="navLink" href="/users">Users</a>
+        </li>
+
+        <li class="navButton" id="currentPage">
+            <a class="navLink" id="currentPageTitle" href="/tracker-entries">User Tracking</a>
+        </li>
+
+        <li class="navButton">
+            <a class="navLink" href="/media-items">Media Items</a>
+        </li>
+
+        <li class="navButton">
+            <a class="navLink" href="/sports-events">Sports Events</a>
+        </li>
+    </nav>
+</header>
+
+<!-- Main Content -->
+<main class="mainView">
+
+<h1 class="tableName">User Tracker Entries</h1>
+<!-- <p><a href="/">Back to Index</a></p>
+
+<h2>Browse User Tracker Entries (SELECT)</h2> -->
     <table border="1" cellpadding="6">
         <thead>
             <tr>
@@ -135,3 +164,5 @@ Original work. No AI or external resources were used.
     </label><br>
     <button type="submit">Delete Tracker Entry</button>
 </form>
+
+</main> 
