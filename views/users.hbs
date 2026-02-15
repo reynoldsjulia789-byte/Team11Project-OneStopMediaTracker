@@ -9,13 +9,42 @@ File: users.hbs
 Original work. No AI or external resources were used.
 -->
 
-<h1>Users</h1>
-<p><a href="/">Back to Index</a></p>
+<!-- Nav Bar -->
+<header id="webHeader">
+    <div id="headerInnerFrame">
+      <a id="siteName" href="/">NextUp: A One-Stop Media Tracker</a>
+      <h1 id="role">Admin</h1>
+    </div>
 
-<h2>Browse Users (SELECT)</h2>
+    <nav class="navbar">
+        <li class="navButton" id="currentPage">
+            <a class="navLink" id="currentPageTitle" href="/users">Users</a>
+        </li>
 
-    <table border="1" cellpadding="6">
-        <thead>
+        <li class="navButton">
+            <a class="navLink" href="/tracker-entries">User Tracking</a>
+        </li>
+
+        <li class="navButton">
+            <a class="navLink" href="/media-items">Media Items</a>
+        </li>
+
+        <li class="navButton">
+            <a class="navLink" href="/sports-events">Sports Events</a>
+        </li>
+    </nav>
+</header>
+
+<!-- Main Content -->
+<main class="mainView">
+
+<h1 class="tableName">Users</h1>
+<!-- <p><a href="/">Back to Index</a></p> -->
+
+<!-- <h2>Browse Users (SELECT)</h2> -->
+
+    <table class="table" border="1" cellpadding="6">
+        <thead class="tableHeader">
             <tr>
                 <th>userID</th>
                 <th>username</th>
@@ -73,3 +102,5 @@ Original work. No AI or external resources were used.
     </label><br>
     <button type="submit">Delete User</button>
 </form>
+
+</main>
