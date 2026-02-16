@@ -19,76 +19,139 @@ Original work. No AI or external resources were used.
     <nav class="navbar">
         <a class="navButton active" href="/users">Users</a>
         <a class="navButton" href="/tracker-entries">User Tracking</a>
-        <a class="navButton" href="/media-items">Media Items</a>
-        <a class="navButton" href="/sports-events">Sports Events</a>
+        <a class="navButton" href="/sports-events">Sports</a>
+        <a class="navButton" href="/media-items">Other Media</a>
     </nav>
 </header>
 
 <!-- Main Content -->
 <main class="mainView">
 
-<h1 class="tableName">Users</h1>
-<!-- <p><a href="/">Back to Index</a></p> -->
+    <div class="tableBox">
+        <h1 class="tableName">Users</h1>
 
-<!-- <h2>Browse Users (SELECT)</h2> -->
+        <table class="table" id="usersTable">
+            <thead class="tableHeader">
+                <tr>
+                    <th>userID</th>
+                    <th>username</th>
+                    <th>email</th>
+                    <th>
+                        {{!-- <button type="button" class="addButton">
+                            <img src="/icons/add.svg" alt="Add"/>
+                            add
+                        </button> --}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>julia</td>
+                    <td>julia@nextup.dev</td>
+                    <td>
+                        <div class="buttonContainer">
+                            {{!-- <button type="button" class="editButton">
+                                <img src="/icons/edit.svg" alt="Edit"/>
+                            </button> --}}
+                            <button type="button" class="deleteButton">
+                                <img src="/icons/delete.svg" alt="Delete"/>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>stephen</td>
+                    <td>stephen@nextup.dev</td>
+                    <td>
+                        <div class="buttonContainer">
+                            {{!-- <button type="button" class="editButton">
+                                <img src="/icons/edit.svg" alt="Edit"/>
+                            </button> --}}
+                            <button type="button" class="deleteButton">
+                                <img src="/icons/delete.svg" alt="Delete"/>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>soph</td>
+                    <td>soph@nextup.dev</td>
+                    <td>
+                        <div class="buttonContainer">
+                            {{!-- <button type="button" class="editButton">
+                                <img src="/icons/edit.svg" alt="Edit"/>
+                            </button> --}}
+                            <button type="button" class="deleteButton">
+                                <img src="/icons/delete.svg" alt="Delete"/>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                {{!-- <tr class = "InsertUser">
+                    <form>
+                        <td>new</td>
+                        <td>
+                            <input class="textBox" type="text" name="username">
+                        </td>
+                        <td>
+                            <input class="textBox" type="email" name="email">
+                        </td>
+                        <td>
+                            <button type="submit" class="doneButton">
+                                <img src="/icons/check.svg" alt="Done"/>
+                                done
+                            </button>
+                        </td>
+                    </form>
+                </tr> --}}
+            </tbody>
+        </table>
+    </div>
 
-    <table class="table" border="1" cellpadding="6">
-        <thead class="tableHeader">
-            <tr>
-                <th>userID</th>
-                <th>username</th>
-                <th>email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>julia</td>
-                <td>julia@nextup.dev</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>stephen</td>
-                <td>stephen@nextup.dev</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>soph</td>
-                <td>soph@nextup.dev</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="tableBox">
+        <h2 class="formName">Add User</h2>
+        <form class="form">
+            <label>Username:
+                <input class="textBox" type="text" name="username">
+            </label><br>
+            <label>Email:
+                <input class="textBox" type="email" name="email">
+            </label><br>
+            <button type="submit" class="doneButton">
+                <img src="/icons/check.svg" alt="Add User"/>
+                add user
+            </button>
+        </form>
+    </div>
 
-<h2>Add User (INSERT)</h2>
-<form>
-    <label>Username:
-        <input type="text" name="username">
-    </label><br>
-    <label>Email:
-        <input type="email" name="email">
-    </label><br>
-    <button type="submit">Add User</button>
-</form>
+    <div class="tableBox">
+        <h2 class="formName">Update User</h2>
+        <form class="form">
+            <label>User ID:
+                <input class="textBox" type="number" name="userID">
+            </label><br>
+            <label>Username:
+                <input class="textBox" type="text" name="username">
+            </label><br>
+            <label>Email:
+                <input class="textBox" type="email" name="email">
+            </label><br>
+            <button type="submit" class="doneButton">
+                <img src="/icons/check.svg" alt="Done"/>
+                update user
+            </button>
+        </form>
+    </div>
 
-<h2>Update User (UPDATE)</h2>
-<form>
-    <label>User ID:
-        <input type="number" name="userID">
-    </label><br>
-    <label>Username:
-        <input type="text" name="username">
-    </label><br>
-    <label>Email:
-        <input type="email" name="email">
-    </label><br>
-    <button type="submit">Update User</button>
-</form>
+        {{!-- <h2 class="formName">Delete User (DELETE)</h2>
+            <form class="form">
+            <label>User ID:
+                <input class="textBox" type="number" name="userID">
+            </label><br>
+            <button type="submit">Delete User</button>
+        </form> --}}
 
-<h2>Delete User (DELETE)</h2>
-<form>
-    <label>User ID:
-        <input type="number" name="userID">
-    </label><br>
-    <button type="submit">Delete User</button>
-</form>
 </main>
