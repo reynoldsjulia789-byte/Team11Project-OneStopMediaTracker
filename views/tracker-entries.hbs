@@ -19,138 +19,143 @@ Original work. No AI or external resources were used.
     <nav class="navbar">
         <a class="navButton" href="/users">Users</a>
         <a class="navButton active" href="/tracker-entries">User Tracking</a>
-        <a class="navButton" href="/media-items">Media Items</a>
-        <a class="navButton" href="/sports-events">Sports Events</a>
+        <a class="navButton" href="/sports-events">Sports</a>
+        <a class="navButton" href="/media-items">Other Media</a>
     </nav>
 </header>
 
 <!-- Main Content -->
 <main class="mainView">
 
-<h1 class="tableName">User Tracker Entries</h1>
-<!-- <p><a href="/">Back to Index</a></p>
+    <div class="tableBox">
+        <h1 class="tableName">User Tracker Entries</h1>
 
-<h2>Browse User Tracker Entries (SELECT)</h2> -->
-    <table>
-        <thead>
-            <tr>
-                <th>entryID</th>
-                <th>userID</th>
-                <th>mediaItemID</th>
-                <th>sportsEventID</th>
-                <th>status</th>
-                <th>savedAt</th>
-                <th>completedAt</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Julia & The Leftovers (TV show) -->
-            <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>2</td>
-                <td>null</td>
-                <td>WATCHING</td>
-                <td>2026-01-10 08:00</td>
-                <td>null</td>
-                <td>
-                    <div class="buttonContainer">
-                        <button type="button" class="editButton">
-                            <img src="/icons/edit.svg" alt="Edit"/>
+        <table>
+            <thead>
+                <tr>
+                    <th>entryID</th>
+                    <th>userID</th>
+                    <th>mediaItemID</th>
+                    <th>sportsEventID</th>
+                    <th>status</th>
+                    <th>savedAt</th>
+                    <th>completedAt</th>
+                    <th>
+                        <button type="button" class="addButton">
+                            <img src="/icons/add.svg" alt="Add"/>
+                            add
                         </button>
-                        <button type="button" class="deleteButton">
-                            <img src="/icons/delete.svg" alt="Delete"/>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Julia & The Leftovers (TV show) -->
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>null</td>
+                    <td>WATCHING</td>
+                    <td>2026-01-10 08:00</td>
+                    <td>null</td>
+                    <td>
+                        <div class="buttonContainer">
+                            <button type="button" class="editButton">
+                                <img src="/icons/edit.svg" alt="Edit"/>
+                            </button>
+                            <button type="button" class="deleteButton">
+                                <img src="/icons/delete.svg" alt="Delete"/>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
 
-            <!-- Soph & Warriors vs Celtics -->
-            <tr>
-                <td>2</td>
-                <td>3</td>
-                <td>null</td>
-                <td>2</td>
-                <td>TO_WATCH</td>
-                <td>2026-01-12 18:30</td>
-                <td>null</td>
-                <td>
-                    <div class="buttonContainer">
-                        <button type="button" class="editButton">
-                            <img src="/icons/edit.svg" alt="Edit"/>
-                        </button>
-                        <button type="button" class="deleteButton">
-                            <img src="/icons/delete.svg" alt="Delete"/>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+                <!-- Soph & Warriors vs Celtics -->
+                <tr>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>null</td>
+                    <td>2</td>
+                    <td>TO_WATCH</td>
+                    <td>2026-01-12 18:30</td>
+                    <td>null</td>
+                    <td>
+                        <div class="buttonContainer">
+                            <button type="button" class="editButton">
+                                <img src="/icons/edit.svg" alt="Edit"/>
+                            </button>
+                            <button type="button" class="deleteButton">
+                                <img src="/icons/delete.svg" alt="Delete"/>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
 
-            <!-- Stephen & A Ghost Story -->
-            <tr>
-                <td>3</td>
-                <td>2</td>
-                <td>3</td>
-                <td>null</td>
-                <td>WATCHED</td>
-                <td>2026-01-05 20:00</td>
-                <td>2026-01-06 21:45</td>
-                <td>
-                    <div class="buttonContainer">
-                        <button type="button" class="editButton">
-                            <img src="/icons/edit.svg" alt="Edit"/>
-                        </button>
-                        <button type="button" class="deleteButton">
-                            <img src="/icons/delete.svg" alt="Delete"/>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+                <!-- Stephen & A Ghost Story -->
+                <tr>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>null</td>
+                    <td>WATCHED</td>
+                    <td>2026-01-05 20:00</td>
+                    <td>2026-01-06 21:45</td>
+                    <td>
+                        <div class="buttonContainer">
+                            <button type="button" class="editButton">
+                                <img src="/icons/edit.svg" alt="Edit"/>
+                            </button>
+                            <button type="button" class="deleteButton">
+                                <img src="/icons/delete.svg" alt="Delete"/>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
 
-            <!-- Stephen & Steelers vs Cardinals -->
-            <tr>
-                <td>4</td>
-                <td>2</td>
-                <td>null</td>
-                <td>1</td>
-                <td>WATCHED</td>
-                <td>2026-01-12 09:00</td>
-                <td>2026-01-12 12:45</td>
-                <td>
-                    <div class="buttonContainer">
-                        <button type="button" class="editButton">
-                            <img src="/icons/edit.svg" alt="Edit"/>
-                        </button>
-                        <button type="button" class="deleteButton">
-                            <img src="/icons/delete.svg" alt="Delete"/>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+                <!-- Stephen & Steelers vs Cardinals -->
+                <tr>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>null</td>
+                    <td>1</td>
+                    <td>WATCHED</td>
+                    <td>2026-01-12 09:00</td>
+                    <td>2026-01-12 12:45</td>
+                    <td>
+                        <div class="buttonContainer">
+                            <button type="button" class="editButton">
+                                <img src="/icons/edit.svg" alt="Edit"/>
+                            </button>
+                            <button type="button" class="deleteButton">
+                                <img src="/icons/delete.svg" alt="Delete"/>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
 
-            <!-- Soph & Football (Klosterman book) -->
-            <tr>
-                <td>5</td>
-                <td>3</td>
-                <td>1</td>
-                <td>null</td>
-                <td>TO_WATCH</td>
-                <td>2026-01-15 10:30</td>
-                <td>null</td>
-                <td>
-                    <div class="buttonContainer">
-                        <button type="button" class="editButton">
-                            <img src="/icons/edit.svg" alt="Edit"/>
-                        </button>
-                        <button type="button" class="deleteButton">
-                            <img src="/icons/delete.svg" alt="Delete"/>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                <!-- Soph & Football (Klosterman book) -->
+                <tr>
+                    <td>5</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>null</td>
+                    <td>TO_WATCH</td>
+                    <td>2026-01-15 10:30</td>
+                    <td>null</td>
+                    <td>
+                        <div class="buttonContainer">
+                            <button type="button" class="editButton">
+                                <img src="/icons/edit.svg" alt="Edit"/>
+                            </button>
+                            <button type="button" class="deleteButton">
+                                <img src="/icons/delete.svg" alt="Delete"/>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 {{!-- <h2>Add Tracker Entry (INSERT)</h2>
 <form>
