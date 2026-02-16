@@ -31,7 +31,7 @@ Original work. No AI or external resources were used.
 <!-- <p><a href="/">Back to Index</a></p>
 
 <h2>Browse User Tracker Entries (SELECT)</h2> -->
-    <table border="1" cellpadding="6">
+    <table>
         <thead>
             <tr>
                 <th>entryID</th>
@@ -41,6 +41,7 @@ Original work. No AI or external resources were used.
                 <th>status</th>
                 <th>savedAt</th>
                 <th>completedAt</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -53,6 +54,16 @@ Original work. No AI or external resources were used.
                 <td>WATCHING</td>
                 <td>2026-01-10 08:00</td>
                 <td>null</td>
+                <td>
+                    <div class="buttonContainer">
+                        <button type="button" class="editButton">
+                            <img src="/icons/edit.svg" alt="Edit"/>
+                        </button>
+                        <button type="button" class="deleteButton">
+                            <img src="/icons/delete.svg" alt="Delete"/>
+                        </button>
+                    </div>
+                </td>
             </tr>
 
             <!-- Soph & Warriors vs Celtics -->
@@ -64,6 +75,16 @@ Original work. No AI or external resources were used.
                 <td>TO_WATCH</td>
                 <td>2026-01-12 18:30</td>
                 <td>null</td>
+                <td>
+                    <div class="buttonContainer">
+                        <button type="button" class="editButton">
+                            <img src="/icons/edit.svg" alt="Edit"/>
+                        </button>
+                        <button type="button" class="deleteButton">
+                            <img src="/icons/delete.svg" alt="Delete"/>
+                        </button>
+                    </div>
+                </td>
             </tr>
 
             <!-- Stephen & A Ghost Story -->
@@ -75,6 +96,16 @@ Original work. No AI or external resources were used.
                 <td>WATCHED</td>
                 <td>2026-01-05 20:00</td>
                 <td>2026-01-06 21:45</td>
+                <td>
+                    <div class="buttonContainer">
+                        <button type="button" class="editButton">
+                            <img src="/icons/edit.svg" alt="Edit"/>
+                        </button>
+                        <button type="button" class="deleteButton">
+                            <img src="/icons/delete.svg" alt="Delete"/>
+                        </button>
+                    </div>
+                </td>
             </tr>
 
             <!-- Stephen & Steelers vs Cardinals -->
@@ -86,6 +117,16 @@ Original work. No AI or external resources were used.
                 <td>WATCHED</td>
                 <td>2026-01-12 09:00</td>
                 <td>2026-01-12 12:45</td>
+                <td>
+                    <div class="buttonContainer">
+                        <button type="button" class="editButton">
+                            <img src="/icons/edit.svg" alt="Edit"/>
+                        </button>
+                        <button type="button" class="deleteButton">
+                            <img src="/icons/delete.svg" alt="Delete"/>
+                        </button>
+                    </div>
+                </td>
             </tr>
 
             <!-- Soph & Football (Klosterman book) -->
@@ -97,11 +138,21 @@ Original work. No AI or external resources were used.
                 <td>TO_WATCH</td>
                 <td>2026-01-15 10:30</td>
                 <td>null</td>
+                <td>
+                    <div class="buttonContainer">
+                        <button type="button" class="editButton">
+                            <img src="/icons/edit.svg" alt="Edit"/>
+                        </button>
+                        <button type="button" class="deleteButton">
+                            <img src="/icons/delete.svg" alt="Delete"/>
+                        </button>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>
 
-<h2>Add Tracker Entry (INSERT)</h2>
+{{!-- <h2>Add Tracker Entry (INSERT)</h2>
 <form>
     <label>User ID:
         <input type="number" name="userID">
@@ -152,6 +203,6 @@ Original work. No AI or external resources were used.
         <input type="number" name="entryID">
     </label><br>
     <button type="submit">Delete Tracker Entry</button>
-</form>
+</form> --}}
 
 </main>

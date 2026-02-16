@@ -27,6 +27,7 @@
     --Color2:               #00BD6B;
     --Color3:               #00BDA1;
     --Color4:               #0B98F1;
+    --Color5:               #99FFF0;
 
     /* Font Sizes */
     --Smallest-Font-Size:           10px;
@@ -157,7 +158,7 @@ body
 }
 
 /* Main Content View Area */
-.mainView
+main
 {
     /* layout */
     display:            flex;
@@ -165,7 +166,6 @@ body
     flex-direction:     column;
     justify-content:    center;
     align-items:        center;
-    gap:                10px;
     flex:               1 0 0;
     align-self:         stretch;
 }
@@ -184,16 +184,190 @@ p.startPage
 {
     /* layout */
     display:        flex;
-    /* width:          982px; */
     align-items:    center;
-    gap:            10px;
+    margin-bottom:  0;
 
     /* typography */
     color:          var(--Fourth-Darkest-Grey);
-    leading-trim:   both;
-    text-edge:      cap;
     font-size:      var(--Largest-Font-Size);
     font-style:     normal;
     font-weight:    300;
     line-height:    normal;
+}
+
+table
+{
+    /* layout */
+    padding:                10px 15px;
+    border-collapse:        separate;
+    border-spacing:         25px 5px;     
+
+    /* style */
+    border-radius:          20px;
+    background:             var(--Third-Darkest-Grey);
+    box-shadow:             0 4px 4px 0 rgba(12, 13, 13, 0.25);
+}
+
+th
+{
+    /* layout */
+    text-align:     left;
+
+    /* typography */
+    color:          var(--Lightest-Grey);
+    font-size:      var(--Third-Largest-Font-Size);
+    font-style:     normal;
+    font-weight:    500;
+    line-height:    normal;
+}
+
+td
+{
+    /* layout */
+    width:          10px;   
+
+    /* typography */
+    color:          var(--Third-Lightest-Grey);
+    font-size:      var(--Medium-Font-Size);
+    font-style:     normal;
+    font-weight:    300;
+    line-height:    normal;
+    white-space:    nowrap;
+}
+
+.buttonContainer
+{
+    /* layout */
+    display:            flex;
+    gap:                5px;
+    width:              100%;
+    justify-content:    space-evenly;
+    align-items:        center;
+}
+
+/* Edit Buttons */
+.editButton
+{ 
+    background: none;
+    border:     none;
+    padding:    4px;
+    cursor:     pointer;
+}
+
+.editButton img, .editButton svg
+{ 
+    width:      18px;
+    height:     18px;
+}
+
+.editButton:hover
+{
+    filter:     hue-rotate(20deg) brightness(1.5);
+}
+
+/* Delete Buttons */
+.deleteButton
+{ 
+    background: none;
+    border:     none;
+    padding:    4px;
+    cursor:     pointer;
+}
+
+.deleteButton img, .deleteButton svg
+{ 
+    width:      18px;
+    height:     18px; 
+}
+
+.deleteButton:hover
+{
+    filter:     hue-rotate(-20deg) brightness(35);
+}
+
+/* Done Button */
+.doneButton
+{ 
+    /* layout */
+    display:                flex;
+    padding:                0px 5px;
+    justify-content:        center;
+    align-items:            center;
+    gap:                    8px;  
+    justify-self:           stretch;
+
+    /* style */
+    border-radius:          8px;
+    border:                 none;
+    background:             var(--Color2);
+
+    /* typography */
+    color:                  var(--Third-Darkest-Grey);
+    font-family:            MuseoModerno;
+    font-size:              var(--Medium-Font-Size);
+    font-style:             normal;
+    font-weight:            500;
+    line-height:            normal;
+}
+
+.doneButton:hover
+{
+    background:             var(--Color1);
+}
+
+/* Add Button */
+.addButton
+{ 
+    /* layout */
+    display:                flex;
+    padding:                0px 5px;
+    justify-content:        center;
+    align-items:            center;
+    gap:                    8px;
+    justify-self:           stretch;
+
+    /* style */
+    border-radius:          8px;
+    border:                 none;
+    background:             var(--Color4);
+
+    /* typography */
+    color:                  var(--Third-Darkest-Grey);
+    font-family:            MuseoModerno;
+    font-size:              var(--Medium-Font-Size);
+    font-style:             normal;
+    font-weight:            500;
+    line-height:            normal;
+}
+
+.addButton img, .addButton svg
+{ 
+    width:      var(--Medium-Font-Size);
+    height:     var(--Medium-Font-Size); 
+}
+
+.addButton:hover
+{
+    background: var(--Color2);
+}
+
+/* Form Fields */
+.textBox
+{
+    /* layout */
+    width:              100%;
+    height:             100%;
+    box-sizing:         border-box;
+    padding:            0px 5px;
+    border-radius:      10px;
+    border:             none;
+    background:         var(--Darkest-Grey);
+
+    /* typography */
+    color:              var(--Third-Lightest-Grey);
+    font-family:        MuseoModerno;
+    font-size:          var(--Medium-Font-Size);
+    font-style:         normal;
+    font-weight:        300;
+    line-height:        normal;
 }
