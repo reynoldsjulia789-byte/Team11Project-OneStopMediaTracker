@@ -42,10 +42,10 @@ Original work. No AI or external resources were used.
                 <th>recordingIsAvailable</th>
                 <th>platform</th>
                 <th>
-                    <button type="button" class="addButton">
+                    {{!-- <button type="button" class="addButton">
                         <img src="/icons/add.svg" alt="Add"/>
                         add
-                    </button>
+                    </button> --}}
                 </th>
             </tr>
         </thead>
@@ -61,9 +61,9 @@ Original work. No AI or external resources were used.
                 <td>NBC</td>
                 <td>
                     <div class="buttonContainer">
-                        <button type="button" class="editButton">
+                        {{!-- <button type="button" class="editButton">
                             <img src="/icons/edit.svg" alt="Edit"/>
-                        </button>
+                        </button> --}}
                         <button type="button" class="deleteButton">
                             <img src="/icons/delete.svg" alt="Delete"/>
                         </button>
@@ -81,9 +81,9 @@ Original work. No AI or external resources were used.
                 <td>ABC</td>
                 <td>
                     <div class="buttonContainer">
-                        <button type="button" class="editButton">
+                        {{!-- <button type="button" class="editButton">
                             <img src="/icons/edit.svg" alt="Edit"/>
-                        </button>
+                        </button> --}}
                         <button type="button" class="deleteButton">
                             <img src="/icons/delete.svg" alt="Delete"/>
                         </button>
@@ -101,9 +101,9 @@ Original work. No AI or external resources were used.
                 <td>FOX</td>
                 <td>
                     <div class="buttonContainer">
-                        <button type="button" class="editButton">
+                        {{!-- <button type="button" class="editButton">
                             <img src="/icons/edit.svg" alt="Edit"/>
-                        </button>
+                        </button> --}}
                         <button type="button" class="deleteButton">
                             <img src="/icons/delete.svg" alt="Delete"/>
                         </button>
@@ -114,73 +114,84 @@ Original work. No AI or external resources were used.
         </table>
     </div>
 
-{{!-- <h2>Add Sports Event (INSERT)</h2>
-<form>
-    <label>Type of Sport:
-        <input type="text" name="typeOfSport">
-    </label><br>
-    <label>Home Team:
-        <input type="text" name="homeTeam">
-    </label><br>
-    <label>Away Team:
-        <input type="text" name="awayTeam">
-    </label><br>
-    <label>Start Time:
-        <input type="datetime-local" name="startTime">
-    </label><br>
-    <label>Runtime (mins):
-        <input type="number" name="runtimeMins">
-    </label><br>
-    <label>Recording Available:
-        <select name="recordingIsAvailable">
-            <option value="1">true</option>
-            <option value="0">false</option>
-        </select>
-    </label><br>
-    <label>Platform:
-        <input type="text" name="platform">
-    </label><br>
-    <button type="submit">Add Sports Event</button>
-</form>
+    <div class="tableBox">
+        <h2 class="formName">Add Sports Event</h2>
+        <form class="form">
+            <label>Type of Sport:
+                <input class="textBox" type="text" name="typeOfSport">
+            </label><br>
+            <label>Home Team:
+                <input class="textBox" type="text" name="homeTeam">
+            </label><br>
+            <label>Away Team:
+                <input class="textBox" type="text" name="awayTeam">
+            </label><br>
+            <label>Start Time:
+                <input class="textBox" type="datetime-local" name="startTime">
+            </label><br>
+            <label>Runtime (mins):
+                <input class="textBox" type="number" name="runtimeMins">
+            </label><br>
+            <label>Recording Available:
+                <select class="textBox" name="recordingIsAvailable">
+                    <option value="1">true</option>
+                    <option value="0">false</option>
+                </select>
+            </label><br>
+            <label>Platform:
+                <input class="textBox" type="text" name="platform">
+            </label><br>
+            <button type="submit" class="doneButton">
+                <img src="/icons/check.svg" alt="Add Sports Event"/>
+                add sports event
+            </button>
+        </form>
+    </div>
 
-<h2>Update Sports Event (UPDATE)</h2>
-<form>
-    <label>Sports Event ID:
-        <input type="number" name="sportsEventID">
-    </label><br>
-    <label>Type of Sport:
-        <input type="text" name="typeOfSport">
-    </label><br>
-    <label>Home Team:
-        <input type="text" name="homeTeam">
-    </label><br>
-    <label>Away Team:
-        <input type="text" name="awayTeam">
-    </label><br>
-    <label>Start Time:
-        <input type="datetime-local" name="startTime">
-    </label><br>
-    <label>Runtime (mins):
-        <input type="number" name="runtimeMins">
-    </label><br>
-    <label>Recording Available:
-        <select name="recordingIsAvailable">
-            <option value="1">true</option>
-            <option value="0">false</option>
-        </select>
-    </label><br>
-    <label>Platform:
-        <input type="text" name="platform">
-    </label><br>
-    <button type="submit">Update Sports Event</button>
-</form>
+    <div class="tableBox">
+        <h2 class="formName">Update Sports Event</h2>
+        <form class="form">
+            <label>Sports Event ID:
+                <input class="textBox" type="number" name="sportsEventID">
+            </label><br>
+            <label>Type of Sport:
+                <input class="textBox" type="text" name="typeOfSport">
+            </label><br>
+            <label>Home Team:
+                <input class="textBox" type="text" name="homeTeam">
+            </label><br>
+            <label>Away Team:
+                <input class="textBox" type="text" name="awayTeam">
+            </label><br>
+            <label>Start Time:
+                <input class="textBox" type="datetime-local" name="startTime">
+            </label><br>
+            <label>Runtime (mins):
+                <input class="textBox" type="number" name="runtimeMins">
+            </label><br>
+            <label>Recording Available:
+                <select class="textBox" name="recordingIsAvailable">
+                    <option value="1">true</option>
+                    <option value="0">false</option>
+                </select>
+            </label><br>
+            <label>Platform:
+                <input class="textBox" type="text" name="platform">
+            </label><br>
+            <button type="submit" class="doneButton">
+                <img src="/icons/check.svg" alt="Update Sports Event"/>
+                update sports event
+            </button>
+        </form>
+    </div>
 
-<h2>Delete Sports Event (DELETE)</h2>
-<form>
-    <label>Sports Event ID:
-        <input type="number" name="sportsEventID">
-    </label><br>
-    <button type="submit">Delete Sports Event</button>
-</form> --}}
+        <!--
+        <h2>Delete Sports Event (DELETE)</h2>
+        <form>
+            <label>Sports Event ID:
+                <input type="number" name="sportsEventID">
+            </label><br>
+            <button type="submit">Delete Sports Event</button>
+        </form> -->
 
 </main>
