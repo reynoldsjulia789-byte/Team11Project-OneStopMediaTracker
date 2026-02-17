@@ -179,7 +179,7 @@ main
 
 p.startPage
 {
-    color:              var(--Fourth-Darkest-Grey);
+    /* color:              var(--Third-Lightest-Grey); */
     font-size:          var(--Second-Largest-Font-Size);
     font-style:         normal;
     font-weight:        300;
@@ -423,5 +423,3 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator
 {
     filter:             brightness(0.32) sepia(100) hue-rotate(150deg) saturate(0.4);
 }
-
-.homepage p.startPage { color: white; }
