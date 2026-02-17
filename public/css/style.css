@@ -48,6 +48,9 @@
 
     /* Set Background */
     background:             var(--Darkest-Grey);
+
+    /* Set to Dark Mode */
+    color-scheme:           dark;
 }
 
 /* Remove default padding around body */
@@ -413,4 +416,10 @@ td
     font-style:         normal;
     font-weight:        300;
     line-height:        normal;
+}
+
+/* calendar icon in datetime picker */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator
+{
+    filter:             brightness(0.32) sepia(100) hue-rotate(150deg) saturate(0.4);
 }
