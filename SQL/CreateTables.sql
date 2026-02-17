@@ -61,13 +61,13 @@ create table UserTrackerEntries
     entryID         int not null auto_increment,
     primary key     (entryID),
     userID          int not null,
-    foreign key     (userID)        references Users(userID),
+    foreign key     (userID)        references Users(userID) on delete cascade,
 
     -- find a way to constrain so you have either a mediaItemID or sportsEventID but not both
     mediaItemID     int,
-    foreign key     (mediaItemID)   references MediaItems(mediaItemID),
+    foreign key     (mediaItemID)   references MediaItems(mediaItemID) on delete cascade,
     sportsEventID   int,
-    foreign key     (sportsEventID) references SportsEvents(sportsEventID),
+    foreign key     (sportsEventID) references SportsEvents(sportsEventID) on delete cascade,
 
     status          enum('TO_WATCH','WATCHING','WATCHED'),
     savedAt         datetime not null,
