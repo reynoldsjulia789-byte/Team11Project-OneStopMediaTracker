@@ -7,7 +7,8 @@ Group 11: Julia Reynolds, Stephen Stanwood
 File: CreateTables.sql
 Purpose: Defines the normalized database schema (DDL) for the NextUp project.
 
-Original work. No AI or external resources were used.
+Original work. No AI used.
+Referred to MySQL documentation on check constraints at the recommendation of peers.
 */
 
 -- Wrapper recommended in the instructions
@@ -63,11 +64,19 @@ create table UserTrackerEntries
     userID          int not null,
     foreign key     (userID)        references Users(userID) on delete cascade,
 
-    -- find a way to constrain so you have either a mediaItemID or sportsEventID but not both
+    -- Connect Sports/Media to track for the user
     mediaItemID     int,
     foreign key     (mediaItemID)   references MediaItems(mediaItemID) on delete cascade,
     sportsEventID   int,
     foreign key     (sportsEventID) references SportsEvents(sportsEventID) on delete cascade,
+
+    -- Check that either Sports or Media is tracked but not both
+    constraint      checkSportsOrMedia
+                    check
+                    (
+                        (mediaItemId is not null and sportsEventID is null) or
+                        (mediaItemId is null and sportsEventID is not null)
+                    ),
 
     status          enum('TO_WATCH','WATCHING','WATCHED'),
     savedAt         datetime not null,
