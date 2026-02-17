@@ -423,3 +423,5 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator
 {
     filter:             brightness(0.32) sepia(100) hue-rotate(150deg) saturate(0.4);
 }
+
+.homepage p.startPage { color: white; }
