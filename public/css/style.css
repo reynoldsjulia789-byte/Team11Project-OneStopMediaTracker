@@ -415,7 +415,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator
     /* style */
     border-radius:          8px;
     border:                 none;
-    background:             var(--Third-Darkest-Grey);
+    background:             none;
 
     /* typography */
     color:                  var(--Third-Lightest-Grey);
