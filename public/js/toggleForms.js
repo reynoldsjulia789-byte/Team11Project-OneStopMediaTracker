@@ -21,6 +21,8 @@
     Please wait to implement any code until after explaining to me how the code works.
 
     Code reviewed and edited by Julia Reynolds after AI's creation.
+    Add button currently not hiding when form is open.
+    Will work on a solution.
 */     
 
 
@@ -30,7 +32,11 @@ document.addEventListener('DOMContentLoaded', () =>
         {
             const targetId = btn.dataset.target;
             const target   = targetId ? document.getElementById(targetId) : null;
-            if (!btn.hasAttribute('aria-expanded')) btn.setAttribute('aria-expanded', 'false');
+
+            if (!btn.hasAttribute('aria-expanded'))
+            {
+                btn.setAttribute('aria-expanded', 'false');
+            }
 
             btn.addEventListener('click', () => 
                 {
