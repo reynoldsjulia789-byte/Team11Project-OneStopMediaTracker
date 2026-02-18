@@ -41,7 +41,7 @@ Original work. No AI or external resources were used.
                     <th>savedAt</th>
                     <th>completedAt</th>
                     <th>
-                        <button type="button" class="addButton">
+                        <button type="button" class="addButton" data-target="addTrackerForm" aria-expanded="false">
                             <img src="/icons/add.svg" alt="Add"/>
                             add
                         </button>
@@ -60,7 +60,7 @@ Original work. No AI or external resources were used.
                     <td>null</td>
                     <td>
                         <div class="buttonContainer">
-                            <button type="button" class="editButton">
+                            <button type="button" class="editButton" data-edit-target="updateTrackerForm" aria-expanded="false">
                                 <img src="/icons/edit.svg" alt="Edit"/>
                             </button>
                             <button type="button" class="deleteButton">
@@ -81,7 +81,7 @@ Original work. No AI or external resources were used.
                     <td>null</td>
                     <td>
                         <div class="buttonContainer">
-                            <button type="button" class="editButton">
+                            <button type="button" class="editButton" data-edit-target="updateTrackerForm" aria-expanded="false">
                                 <img src="/icons/edit.svg" alt="Edit"/>
                             </button>
                             <button type="button" class="deleteButton">
@@ -102,7 +102,7 @@ Original work. No AI or external resources were used.
                     <td>2026-01-06 21:45</td>
                     <td>
                         <div class="buttonContainer">
-                            <button type="button" class="editButton">
+                            <button type="button" class="editButton" data-edit-target="updateTrackerForm" aria-expanded="false">
                                 <img src="/icons/edit.svg" alt="Edit"/>
                             </button>
                             <button type="button" class="deleteButton">
@@ -123,7 +123,7 @@ Original work. No AI or external resources were used.
                     <td>2026-01-12 12:45</td>
                     <td>
                         <div class="buttonContainer">
-                            <button type="button" class="editButton">
+                            <button type="button" class="editButton" data-edit-target="updateTrackerForm" aria-expanded="false">
                                 <img src="/icons/edit.svg" alt="Edit"/>
                             </button>
                             <button type="button" class="deleteButton">
@@ -144,7 +144,7 @@ Original work. No AI or external resources were used.
                     <td>null</td>
                     <td>
                         <div class="buttonContainer">
-                            <button type="button" class="editButton">
+                            <button type="button" class="editButton" data-edit-target="updateTrackerForm" aria-expanded="false">
                                 <img src="/icons/edit.svg" alt="Edit"/>
                             </button>
                             <button type="button" class="deleteButton">
@@ -157,7 +157,7 @@ Original work. No AI or external resources were used.
         </table>
     </div>
 
-    <div class="tableBox">
+    <div class="tableBox hidden" id="addTrackerForm">
         <h2 class="formName">Add Tracker Entry</h2>
         <form class="form">
             <label>User ID:
@@ -182,14 +182,19 @@ Original work. No AI or external resources were used.
             <label>Completed At:
                 <input class="textBox" type="datetime-local" name="completedAt">
             </label><br>
-            <button class="doneButton" type="submit">
-                <img src="/icons/check.svg" alt="Add Tracker Entry"/>
-                add entry
-            </button>
+            <div class="buttonBox">
+                <button type="button" class="cancelButton">
+                    cancel
+                </button>
+                <button type="submit" class="doneButton">
+                    <img src="/icons/check.svg" alt="Add Tracker Entry"/>
+                    add entry
+                </button>
+            </div>
         </form>
     </div>
 
-    <div class="tableBox">
+    <div class="tableBox hidden" id="updateTrackerForm">
         <h2 class="formName">Update Tracker Entry</h2>
         <form class="form">
             <label>Entry ID:
@@ -205,10 +210,15 @@ Original work. No AI or external resources were used.
             <label>Completed At:
                 <input class="textBox" type="datetime-local" name="completedAt">
             </label><br>
-            <button class="doneButton" type="submit">
-                <img src="/icons/check.svg" alt="Update Tracker Entry"/>
-                update entry
-            </button>
+            <div class="buttonBox">
+                <button type="button" class="cancelButton">
+                    cancel
+                </button>
+                <button type="submit" class="doneButton">
+                    <img src="/icons/check.svg" alt="Update Tracker Entry"/>
+                    update entry
+                </button>
+            </div>
         </form>
     </div>
 
@@ -219,6 +229,6 @@ Original work. No AI or external resources were used.
         <input type="number" name="entryID">
     </label><br>
     <button type="submit">Delete Tracker Entry</button>
-</form> --}}
+</form> -->
 
 </main>
