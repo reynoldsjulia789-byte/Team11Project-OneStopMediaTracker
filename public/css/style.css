@@ -253,6 +253,11 @@ td
 }
 
 /* Forms */
+.hidden
+{
+    display: none;
+}
+
 .form
 {
     /* layout */
@@ -289,6 +294,41 @@ td
     font-style:     normal;
     font-weight:    300;
     line-height:    normal;
+}
+
+/* Form Fields */
+.textBox
+{
+    /* layout */
+    width:              100%;
+    height:             100%;
+    box-sizing:         border-box;
+    padding:            0px 5px;
+    border-radius:      10px;
+    border:             none;
+    background:         var(--Darkest-Grey);
+
+    /* typography */
+    color:              var(--Third-Lightest-Grey);
+    font-family:        var(--Font);
+    font-size:          var(--Medium-Font-Size);
+    font-style:         normal;
+    font-weight:        300;
+    line-height:        normal;
+}
+
+/* calendar icon in datetime picker */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator
+{
+    filter:             brightness(0.32) sepia(100) hue-rotate(150deg) saturate(0.4);
+}
+
+.buttonBox
+{
+    /* layout */
+    display:            flex;
+    align-items:        center;
+    justify-content:    space-between;
 }
 
 /* Edit Buttons */
@@ -361,6 +401,37 @@ td
     background:             var(--Color1);
 }
 
+/* Cancel Button */
+.cancelButton
+{ 
+    /* layout */
+    display:                flex;
+    padding:                0px 8px;
+    justify-content:        center;
+    align-items:            center;
+    gap:                    8px;  
+    justify-self:           stretch;
+
+    /* style */
+    border-radius:          8px;
+    border:                 none;
+    background:             var(--Third-Darkest-Grey);
+
+    /* typography */
+    color:                  var(--Third-Lightest-Grey);
+    font-family:            var(--Font);
+    font-size:              var(--Medium-Font-Size);
+    font-style:             normal;
+    font-weight:            500;
+    line-height:            normal;
+}
+
+.cancelButton:hover
+{
+    background:             var(--Fourth-Darkest-Grey);
+    color:                  var(--Third-Darkest-Grey);
+}
+
 /* Add Button */
 .addButton
 { 
@@ -395,31 +466,4 @@ td
 .addButton:hover
 {
     background: var(--Color2);
-}
-
-/* Form Fields */
-.textBox
-{
-    /* layout */
-    width:              100%;
-    height:             100%;
-    box-sizing:         border-box;
-    padding:            0px 5px;
-    border-radius:      10px;
-    border:             none;
-    background:         var(--Darkest-Grey);
-
-    /* typography */
-    color:              var(--Third-Lightest-Grey);
-    font-family:        var(--Font);
-    font-size:          var(--Medium-Font-Size);
-    font-style:         normal;
-    font-weight:        300;
-    line-height:        normal;
-}
-
-/* calendar icon in datetime picker */
-input[type="datetime-local"]::-webkit-calendar-picker-indicator
-{
-    filter:             brightness(0.32) sepia(100) hue-rotate(150deg) saturate(0.4);
 }
