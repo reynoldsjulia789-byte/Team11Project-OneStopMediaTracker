@@ -1,11 +1,9 @@
 /*
 CS 340 – Introduction to Databases
-Project Step 2 Draft – Normalized Schema + DDL with Sample Data
 Project: NextUp – A One-Stop Media Tracker
 Group 11: Julia Reynolds, Stephen Stanwood
 
 File: InsertSampleData.sql
-Purpose: Inserts sample data to fit the NextUp database schema.
 
 Original work. No AI or external resources were used.
 */

@@ -1,6 +1,5 @@
 <!--
 CS 340 – Introduction to Databases
-Project Step 3 Draft – Design UI Interface + DML SQL
 Project: NextUp – A One-Stop Media Tracker
 Group 11: Julia Reynolds, Stephen Stanwood
 
@@ -21,6 +20,8 @@ Original work. No AI or external resources were used.
         <a class="navButton active" href="/tracker-entries">User Tracking</a>
         <a class="navButton" href="/sports-events">Sports</a>
         <a class="navButton" href="/media-items">Other Media</a>
+        <a class="navButton" href="/demo-delete">Delete (Test)</a>
+        <a class="navButton" href="/reset">Reset Database</a>
     </nav>
 </header>
 
@@ -48,111 +49,19 @@ Original work. No AI or external resources were used.
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Julia & The Leftovers (TV show) -->
-                <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>null</td>
-                    <td>WATCHING</td>
-                    <td>2026-01-10 08:00</td>
-                    <td>null</td>
-                    <td>
-                        <div class="buttonContainer">
-                            <button type="button" class="editButton" data-edit-target="updateTrackerForm" aria-expanded="false">
-                                <img src="/icons/edit.svg" alt="Edit"/>
-                            </button>
-                            <button type="button" class="deleteButton">
-                                <img src="/icons/delete.svg" alt="Delete"/>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Soph & Warriors vs Celtics -->
-                <tr>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>null</td>
-                    <td>2</td>
-                    <td>TO_WATCH</td>
-                    <td>2026-01-12 18:30</td>
-                    <td>null</td>
-                    <td>
-                        <div class="buttonContainer">
-                            <button type="button" class="editButton" data-edit-target="updateTrackerForm" aria-expanded="false">
-                                <img src="/icons/edit.svg" alt="Edit"/>
-                            </button>
-                            <button type="button" class="deleteButton">
-                                <img src="/icons/delete.svg" alt="Delete"/>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Stephen & A Ghost Story -->
-                <tr>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>null</td>
-                    <td>WATCHED</td>
-                    <td>2026-01-05 20:00</td>
-                    <td>2026-01-06 21:45</td>
-                    <td>
-                        <div class="buttonContainer">
-                            <button type="button" class="editButton" data-edit-target="updateTrackerForm" aria-expanded="false">
-                                <img src="/icons/edit.svg" alt="Edit"/>
-                            </button>
-                            <button type="button" class="deleteButton">
-                                <img src="/icons/delete.svg" alt="Delete"/>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Stephen & Steelers vs Cardinals -->
-                <tr>
-                    <td>4</td>
-                    <td>2</td>
-                    <td>null</td>
-                    <td>1</td>
-                    <td>WATCHED</td>
-                    <td>2026-01-12 09:00</td>
-                    <td>2026-01-12 12:45</td>
-                    <td>
-                        <div class="buttonContainer">
-                            <button type="button" class="editButton" data-edit-target="updateTrackerForm" aria-expanded="false">
-                                <img src="/icons/edit.svg" alt="Edit"/>
-                            </button>
-                            <button type="button" class="deleteButton">
-                                <img src="/icons/delete.svg" alt="Delete"/>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Soph & Football (Klosterman book) -->
-                <tr>
-                    <td>5</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>null</td>
-                    <td>TO_WATCH</td>
-                    <td>2026-01-15 10:30</td>
-                    <td>null</td>
-                    <td>
-                        <div class="buttonContainer">
-                            <button type="button" class="editButton" data-edit-target="updateTrackerForm" aria-expanded="false">
-                                <img src="/icons/edit.svg" alt="Edit"/>
-                            </button>
-                            <button type="button" class="deleteButton">
-                                <img src="/icons/delete.svg" alt="Delete"/>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+            <tbody> 
+                {{#each data}}
+                    <tr>
+                    <td>{{this.entryID}}</td>
+                    <td>{{this.userID}}</td>
+                    <td>{{this.mediaItemID}}</td>
+                    <td>{{this.sportsEventID}}</td>
+                    <td>{{this.status}}</td>
+                    <td>{{this.savedAt}}</td>
+                    <td>{{this.completedAt}}</td>
+                    <td></td>
+                    </tr>
+                {{/each}}
             </tbody>
         </table>
     </div>

@@ -1,6 +1,5 @@
 /*
 CS 340 – Introduction to Databases
-Project Step 3 Draft – Design UI Interface + DML SQL
 Project: NextUp – A One-Stop Media Tracker
 Group 11: Julia Reynolds, Stephen Stanwood
 
@@ -20,6 +19,9 @@ const express = require('express');
 // use Handlebars for templating (as suggested in Step 3)
 const exphbs = require('express-handlebars');
 
+// set up our dabatase connection
+const db = require('./database/db-connector');
+
 const app = express();
 const PORT = 9130;
 
@@ -31,7 +33,6 @@ app.set('views', './views');
 // set up middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 app.use(express.static('public'));
 
 
@@ -44,23 +45,84 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-// One page per table (Step 3 rubric)
-app.get('/users', (req, res) => {
-    res.render('users');
+// get all users from the database and render them in the users.hbs template
+app.get('/users', async (req, res) => {
+  try {
+    const query = 'SELECT userID, username, email FROM Users;';
+    const [rows] = await db.query(query);
+    res.render('users', { data: rows });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Database error');
+  }
 });
 
-app.get('/media-items', (req, res) => {
-    res.render('media-items');
+// get all media items from the database and render them in the media-items.hbs template
+app.get('/media-items', async (req, res) => {
+  try {
+    const query = `
+      SELECT mediaItemID, mediaType, title, releaseDate, runtimeMins, creator, platform
+      FROM MediaItems;
+    `;
+    const [rows] = await db.query(query);
+    res.render('media-items', { data: rows });
+  } catch (err) {
+    console.error('DB error on /media-items:', err);
+    res.status(500).send('Database error');
+  }
 });
 
-app.get('/sports-events', (req, res) => {
-    res.render('sports-events');
+// get all sports events from the database and render them in the sports-events.hbs template
+app.get('/sports-events', async (req, res) => {
+  try {
+    const query = `
+      SELECT sportsEventID, typeOfSport, homeTeam, awayTeam, startTime, runtimeMins, recordingIsAvailable, platform
+      FROM SportsEvents;
+    `;
+    const [rows] = await db.query(query);
+    res.render('sports-events', { data: rows });
+  } catch (err) {
+    console.error('DB error on /sports-events:', err);
+    res.status(500).send('Database error');
+  }
 });
 
-app.get('/tracker-entries', (req, res) => {
-    res.render('tracker-entries');
+// get all tracker entries from the database and render them in the tracker-entries.hbs template
+app.get('/tracker-entries', async (req, res) => {
+  try {
+    const query = `
+      SELECT entryID, userID, mediaItemID, sportsEventID, status, savedAt, completedAt
+      FROM UserTrackerEntries;
+    `;
+    const [rows] = await db.query(query);
+    res.render('tracker-entries', { data: rows });
+  } catch (err) {
+    console.error('DB error on /tracker-entries:', err);
+    res.status(500).send('Database error');
+  }
 });
 
+// reset database (calls stored procedure)
+app.get('/reset', async (req, res) => {
+  try {
+    await db.query('CALL sp_reset_nextup();');
+    res.redirect('/users');
+  } catch (err) {
+    console.error('RESET failed:', err);
+    res.status(500).send('RESET failed. 😞 Check server console.');
+  }
+});
+
+// hard-coded delete demo (calls stored procedure)
+app.get('/demo-delete', async (req, res) => {
+  try {
+    await db.query('CALL sp_demo_delete_user();');
+    return res.redirect('/users');
+  } catch (err) {
+    console.error('Demo delete failed:', err);
+    return res.status(500).send('Demo delete failed.');
+  }
+});
 
 /*
     LISTENER

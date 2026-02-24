@@ -1,6 +1,5 @@
 /*
 CS 340 – Introduction to Databases
-Project Step 2 Draft – Normalized Schema + DDL with Sample Data
 Project: NextUp – A One-Stop Media Tracker
 Group 11: Julia Reynolds, Stephen Stanwood
 
@@ -28,6 +27,13 @@ create table Users
     username    varchar(255) not null unique,
     email       varchar(255) not null unique
 );
+
+-- Insert sample users
+insert into Users (username, email)
+values
+('stephen', 'stephen@example.com'),
+('julia',   'julia@example.com'),
+('soph',    'soph@example.com');
 
 -- Stores information about movies, TV shows, and books
 create table MediaItems
@@ -74,8 +80,8 @@ create table UserTrackerEntries
     constraint      checkSportsOrMedia
                     check
                     (
-                        (mediaItemId is not null and sportsEventID is null) or
-                        (mediaItemId is null and sportsEventID is not null)
+                        (mediaItemID is not null and sportsEventID is null) or
+                        (mediaItemID is null and sportsEventID is not null)
                     ),
 
     status          enum('TO_WATCH','WATCHING','WATCHED'),
