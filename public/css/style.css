@@ -28,6 +28,7 @@
     --Color3:               #00BDA1;
     --Color4:               #0B98F1;
     --Color5:               #99FFF0;
+    --WarningColor:         #ffd579;
 
     /* Shadow */
     --Shadow:                 0 4px 4px 0 rgba(12, 13, 13, 0.25);
@@ -111,13 +112,23 @@ body
 {
     /* layout */
     display:            flex;
-    padding:            5px 10px 0 10px;
-    align-items:        flex-start;
-    /* gap:                5px; */
+    padding:            0px 10px 0 25px;
+    align-items:        center;
+    justify-content:    space-between;
     align-self:         stretch;
 
     /* style */
     background:         var(--Third-Darkest-Grey);
+}
+
+nav
+{
+    /* layout */
+    display:            flex;
+    padding:            5px 0px 0px 0px;
+    align-items:        flex-start;
+    /* gap:                5px; */
+    align-self:         stretch;
 }
 
 .navButton
@@ -162,6 +173,59 @@ body
     /* style */
     border-radius:      20px 20px 0 0;
     background:         var(--Darkest-Grey);
+}
+
+/* Reset Button */
+.resetButton
+{
+    /* layout */
+    display:                flex;
+    padding:                0px 10px;
+    justify-content:        center;
+    align-items:            center;
+    gap:                    8px;
+    justify-self:           stretch;
+
+    /* style */
+    border-radius:          8px;
+    border:                 none;
+    background:             none;
+
+    /* typography */
+    color:                  var(--Third-Lightest-Grey);
+    font-family:            var(--Font);
+    font-size:              var(--Third-Smallest-Font-Size);
+    font-style:             normal;
+    font-weight:            500;
+    line-height:            normal;
+}
+
+.resetButton img, .resetButton svg
+{ 
+    width:      var(--Third-Smallest-Font-Size);
+    height:     var(--Third-Smallest-Font-Size);
+}
+
+.resetButton:hover
+{
+    color:      var(--Third-Darkest-Grey);
+    background: var(--WarningColor);
+}
+
+.resetButton:hover .hidden
+{
+    display:    inline;
+}
+
+.resetButton:hover p
+{
+    margin:     0;
+    padding:    0;
+}
+
+.resetButton:hover img, .resetButton:hover svg
+{ 
+    filter:     brightness(25%);
 }
 
 /* Main Content View Area */
