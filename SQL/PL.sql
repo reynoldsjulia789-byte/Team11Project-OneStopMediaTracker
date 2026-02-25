@@ -298,13 +298,14 @@ create procedure sp_delete_user
 )
 begin
     declare error_message varchar(255);
-    
+
     -- error handling
     declare exit handler for sqlexception
     begin
         -- roll back the transaction on any error
         rollback;
         -- propogate the custom error message to the caller
+        resignal;
     end;
 
     start transaction;
@@ -323,3 +324,121 @@ begin
 end //
 delimiter ;
 
+/*
+    Sports Events Table Procedures
+
+    In this section:
+    - sp_insert_sports_event
+    - sp_update_sports_event
+    - sp_delete_sports_event
+*/
+
+-- Insert/Create New Sports Event
+drop procedure if exists sp_insert_sports_event;
+
+delimiter //
+create procedure sp_insert_sports_event
+(
+    in  p_typeOfSport          VARCHAR(255) NOT NULL,
+    in  p_homeTeam             VARCHAR(255) NOT NULL,
+    in  p_awayTeam             VARCHAR(255) NOT NULL,
+    in  p_startTime            DATETIME NOT NULL,
+    in  p_runtimeMins          INT,
+    in  p_recordingIsAvailable BOOLEAN,
+    in  p_platform             VARCHAR(255),
+    out p_sportsEventID        int
+)
+begin
+    -- Insert data into sports events table
+    insert into SportsEvents
+    (
+        typeOfSport,
+        homeTeam,
+        awayTeam,
+        startTime,
+        runtimeMins,
+        recordingIsAvailable,
+        platform
+    )
+    values
+    (
+        p_typeOfSport,
+        p_homeTeam,
+        p_awayTeam,
+        p_startTime,
+        p_runtimeMins,
+        p_recordingIsAvailable,
+        p_platform
+    );
+
+    -- Store the ID of the last inserted row
+    select last_insert_id() into p_sportsEventID;
+
+    -- Display the ID of the last inserted person.
+    select last_insert_id() AS 'newID';
+end //
+delimiter ;
+
+-- Update Sports Events
+drop procedure if exists sp_update_sports_events
+
+delimiter //
+create procedure sp_update_sports_events
+(
+    in  p_sportsEventID        int not null,
+    in  p_typeOfSport          VARCHAR(255) NOT NULL,
+    in  p_homeTeam             VARCHAR(255) NOT NULL,
+    in  p_awayTeam             VARCHAR(255) NOT NULL,
+    in  p_startTime            DATETIME NOT NULL,
+    in  p_runtimeMins          INT,
+    in  p_recordingIsAvailable BOOLEAN,
+    in  p_platform             VARCHAR(255)
+)
+begin
+    update  SportsEvents
+    set     typeOfSport          = p_typeOfSport,
+            homeTeam             = p_homeTeam,
+            awayTeam             = p_awayTeam,
+            startTime            = p_startTime,
+            runtimeMins          = p_runtimeMins,
+            recordingIsAvailable = p_recordingIsAvailable,
+            platform             = p_platform
+    where   sportsEventID        = p_sportsEventID;
+end //
+delimiter ;
+
+-- Delete Sports Event
+drop procedure if exists sp_delete_sports_event
+
+delimiter //
+create procedure sp_delete_sports_event
+(
+    in p_sportsEventID     int not null
+)
+begin
+    declare error_message varchar(255);
+    
+    -- error handling
+    declare exit handler for sqlexception
+    begin
+        -- roll back the transaction on any error
+        rollback;
+        -- propogate the custom error message to the caller
+        resignal;
+    end;
+
+    start transaction;
+        -- delete the corresponding row from SportsEvents
+        delete from SportsEvents
+        where       sportsEventID = p_sportsEventID;
+
+        -- number of rows affected by the preceding statement.
+        if row_count() = 0 then
+            set error_message = concat('No matching record found in Users for userID: ', p_userID);
+            -- Trigger custom error, invoke exit handler
+            signal sqlstate '45000' set message_text = error_message;
+        end if;
+
+    commit;
+end //
+delimiter ;
