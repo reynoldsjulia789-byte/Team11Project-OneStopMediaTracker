@@ -8,8 +8,11 @@ File: PL.sql
 Contains stored procedures:
 - sp_reset_nextup
 - sp_demo_delete_user
+- sp_insert_user
 
-Original work. No AI or external resources were used.
+Original work. No AI used.
+CRUD procedures adapted from:
+- CS340 Exploration - Implementing CUD operations in your app (https://canvas.oregonstate.edu/courses/2031764/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26243436)
 */
 
 -- RESET procedure
@@ -230,3 +233,93 @@ BEGIN
    DELETE FROM Users WHERE username = 'soph';
 END//
 DELIMITER ;
+
+/*
+    Users Table Procedures
+
+    In this section:
+    - sp_insert_user
+    - sp_update_user
+    - sp_delete_user
+*/
+
+-- Insert/Create New User
+drop procedure if exists sp_insert_user;
+
+delimiter //
+create procedure sp_insert_user
+(
+    in  p_username    varchar(255) not null unique,
+    in  p_email       varchar(255) not null unique,
+    out p_userID      int
+)
+begin
+    -- Insert data into users table
+    insert into Users (username,   email)
+    values            (p_username, p_email);
+
+    -- Store the ID of the last inserted row
+    select last_insert_id() into p_userID;
+
+    -- Display the ID of the last inserted person.
+    select last_insert_id() AS 'newID';
+
+    -- Example of how to get the ID of the newly created person:
+        -- CALL sp_CreatePerson('Theresa', 'Evans', 2, 48, @new_id);
+        -- SELECT @new_id AS 'New Person ID';
+end //
+delimiter ;
+
+-- Update User
+drop procedure if exists sp_update_user
+
+delimiter //
+create procedure sp_update_user
+(
+    in p_userID     int not null,
+    in p_username   varchar(255) not null unique,
+    in p_email      varchar(255) not null unique,
+)
+begin
+    update  Users
+    set     username = p_username,
+            email    = p_email
+    where   userID   = p_userID;
+end //
+delimiter ;
+
+-- Delete User
+drop procedure if exists sp_delete_user
+
+delimiter //
+create procedure sp_delete_user
+(
+    in p_userID     int not null
+)
+begin
+    declare error_message varchar(255);
+    
+    -- error handling
+    declare exit handler for sqlexception
+    begin
+        -- roll back the transaction on any error
+        rollback;
+        -- propogate the custom error message to the caller
+    end;
+
+    start transaction;
+        -- delete the corresponding row from Users
+        delete from Users
+        where       userID = p_userID;
+
+        -- number of rows affected by the preceding statement.
+        if row_count() = 0 then
+            set error_message = concat('No matching record found in Users for userID: ', p_userID);
+            -- Trigger custom error, invoke exit handler
+            signal sqlstate '45000' set message_text = error_message;
+        end if;
+
+    commit;
+end //
+delimiter ;
+
