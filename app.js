@@ -61,7 +61,7 @@ app.get('/users', async (req, res) => {
 app.get('/media-items', async (req, res) => {
   try {
     const query = `
-      SELECT mediaItemID, mediaType, title, releaseDate, runtimeMins, creator, platform
+      SELECT mediaItemID, mediaType, title, DATE_FORMAT(releaseDate, '%b %e, %Y') AS releaseDate, runtimeMins, creator, platform
       FROM MediaItems;
     `;
     const [rows] = await db.query(query);
@@ -76,7 +76,18 @@ app.get('/media-items', async (req, res) => {
 app.get('/sports-events', async (req, res) => {
   try {
     const query = `
-      SELECT sportsEventID, typeOfSport, homeTeam, awayTeam, startTime, runtimeMins, recordingIsAvailable, platform
+      SELECT 
+        sportsEventID, 
+        typeOfSport, 
+        homeTeam, 
+        awayTeam, 
+        DATE_FORMAT(startTime, '%b %e, %Y %h:%i %p') AS startTime, 
+        runtimeMins, 
+        CASE
+          WHEN recordingIsAvailable = 1 THEN 'Available'
+          ELSE 'Unavailable'
+        END AS recordingIsAvailable,
+        platform
       FROM SportsEvents;
     `;
     const [rows] = await db.query(query);
@@ -87,12 +98,26 @@ app.get('/sports-events', async (req, res) => {
   }
 });
 
-// get all tracker entries from the database and render them in the tracker-entries.hbs template
+// get all tracker entries from the database and render them (updated with JOINs to address FKs)
+// now includes date formatting to make the timestamps easier to read
 app.get('/tracker-entries', async (req, res) => {
   try {
     const query = `
-      SELECT entryID, userID, mediaItemID, sportsEventID, status, savedAt, completedAt
-      FROM UserTrackerEntries;
+      SELECT
+        ute.entryID,
+        u.username AS user,
+        COALESCE(
+          mi.title,
+          CONCAT(se.awayTeam, ' @ ', se.homeTeam)
+        ) AS trackedItem,
+        ute.status,
+        DATE_FORMAT(ute.savedAt, '%b %e, %Y %h:%i %p') AS savedAt,
+        DATE_FORMAT(ute.completedAt, '%b %e, %Y %h:%i %p') AS completedAt
+      FROM UserTrackerEntries ute
+      JOIN Users u ON ute.userID = u.userID
+      LEFT JOIN MediaItems mi ON ute.mediaItemID = mi.mediaItemID
+      LEFT JOIN SportsEvents se ON ute.sportsEventID = se.sportsEventID
+      ORDER BY ute.entryID;
     `;
     const [rows] = await db.query(query);
     res.render('tracker-entries', { data: rows });

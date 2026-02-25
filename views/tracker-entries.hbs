@@ -34,13 +34,12 @@ Original work. No AI or external resources were used.
         <table>
             <thead>
                 <tr>
-                    <th>entryID</th>
-                    <th>userID</th>
-                    <th>mediaItemID</th>
-                    <th>sportsEventID</th>
-                    <th>status</th>
-                    <th>savedAt</th>
-                    <th>completedAt</th>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Title / Event</th>
+                    <th>Status</th>
+                    <th>Saved At</th>
+                    <th>Completed At</th>
                     <th>
                         <button type="button" class="addButton" data-target="addTrackerForm" aria-expanded="false">
                             <img src="/icons/add.svg" alt="Add"/>
@@ -53,9 +52,8 @@ Original work. No AI or external resources were used.
                 {{#each data}}
                     <tr>
                     <td>{{this.entryID}}</td>
-                    <td>{{this.userID}}</td>
-                    <td>{{this.mediaItemID}}</td>
-                    <td>{{this.sportsEventID}}</td>
+                    <td>{{this.user}}</td>
+                    <td>{{this.trackedItem}}</td>
                     <td>{{this.status}}</td>
                     <td>{{this.savedAt}}</td>
                     <td>{{this.completedAt}}</td>
