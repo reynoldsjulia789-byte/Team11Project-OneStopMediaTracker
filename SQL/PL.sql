@@ -225,6 +225,8 @@ BEGIN
 END//
 DELIMITER ;
 
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
 -- DELETE procedure (hard-coded just for testing)
 DROP PROCEDURE IF EXISTS sp_demo_delete_user;
 DELIMITER //
@@ -233,6 +235,8 @@ BEGIN
    DELETE FROM Users WHERE username = 'soph';
 END//
 DELIMITER ;
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 /*
     Users Table Procedures
@@ -323,6 +327,8 @@ begin
     commit;
 end //
 delimiter ;
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 /*
     Sports Events Table Procedures
@@ -442,3 +448,130 @@ begin
     commit;
 end //
 delimiter ;
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+/*
+    Media Items Table Procedures
+
+    In this section:
+    - sp_insert_media_item
+    - sp_update_media_item
+    - sp_delete_media_item
+*/
+
+-- Insert/Create New Media Item
+drop procedure if exists sp_insert_media_item;
+
+delimiter //
+create procedure sp_insert_media_item
+(
+    in  p_mediaType           ENUM('MOVIE','SHOW','BOOK') NOT NULL,
+    in  p_title               VARCHAR(255) NOT NULL,
+    in  p_releaseDate         DATETIME,
+    in  p_runtimeMins         INT,
+    in  p_creator             VARCHAR(255),
+    in  p_platform            VARCHAR(255),
+    out p_mediaItemID         int
+)
+begin
+    -- Insert data into Media Items table
+    insert into MediaItems
+    (
+        mediaType,  
+        title,      
+        releaseDate,
+        runtimeMins,
+        creator,    
+        platform   
+    )
+    values
+    (
+        mediaType   = p_mediaType,  
+        title       = p_title,      
+        releaseDate = p_releaseDate,
+        runtimeMins = p_runtimeMins,
+        creator     = p_creator,    
+        platform    = p_platform
+    );
+
+    -- Store the ID of the last inserted row
+    select last_insert_id() into p_mediaItemID;
+
+    -- Display the ID of the last inserted person.
+    select last_insert_id() AS 'newID';
+end //
+delimiter ;
+
+-- Update User
+drop procedure if exists sp_update_media_item
+
+delimiter //
+create procedure sp_update_media_item
+(
+    in  p_mediaItemID     int not null,
+    in  p_mediaType       ENUM('MOVIE','SHOW','BOOK') NOT NULL,
+    in  p_title           VARCHAR(255) NOT NULL,
+    in  p_releaseDate     DATETIME,
+    in  p_runtimeMins     INT,
+    in  p_creator         VARCHAR(255),
+    in  p_platform        VARCHAR(255),
+)
+begin
+    update  MediaItems
+    set     mediaType   = p_mediaType,  
+            title       = p_title,      
+            releaseDate = p_releaseDate,
+            runtimeMins = p_runtimeMins,
+            creator     = p_creator,    
+            platform    = p_platform
+    where   mediaItemID = p_mediaItemID;
+end //
+delimiter ;
+
+-- Delete User
+drop procedure if exists sp_delete_media_item
+
+delimiter //
+create procedure sp_delete_media_item
+(
+    in p_mediaItemID      int not null
+)
+begin
+    declare error_message varchar(255);
+
+    -- error handling
+    declare exit handler for sqlexception
+    begin
+        -- roll back the transaction on any error
+        rollback;
+        -- propogate the custom error message to the caller
+        resignal;
+    end;
+
+    start transaction;
+        -- delete the corresponding row from Media Items
+        delete from MediaItems
+        where       mediaItemID = p_mediaItemID;
+
+        -- number of rows affected by the preceding statement.
+        if row_count() = 0 then
+            set error_message = concat('No matching record found in Users for userID: ', p_userID);
+            -- Trigger custom error, invoke exit handler
+            signal sqlstate '45000' set message_text = error_message;
+        end if;
+
+    commit;
+end //
+delimiter ;
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+/*
+    User Tracker Entries Table Procedures
+
+    In this section:
+    - sp_insert_tracker_entry
+    - sp_update_tracker_entry
+    - sp_delete_tracker_entry
+*/
