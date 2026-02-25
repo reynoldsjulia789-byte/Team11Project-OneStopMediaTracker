@@ -15,14 +15,21 @@ Original work. No AI or external resources were used.
       <h1 id="role">Admin</h1>
     </div>
 
-    <nav class="navbar">
-        <a class="navButton" href="/users">Users</a>
-        <a class="navButton" href="/tracker-entries">User Tracking</a>
-        <a class="navButton" href="/sports-events">Sports</a>
-        <a class="navButton" href="/media-items">Other Media</a>
-        <a class="navButton" href="/demo-delete">Delete (Test)</a>
-        <a class="navButton" href="/reset">Reset Database</a>
-    </nav>
+    <div class="navbar">
+        <nav>
+            <a class="navButton active" href="/users">Users</a>
+            <a class="navButton" href="/tracker-entries">User Tracking</a>
+            <a class="navButton" href="/sports-events">Sports</a>
+            <a class="navButton" href="/media-items">Other Media</a>
+            <a class="navButton" href="/demo-delete">Delete (Test)</a>
+            <a class="navButton" href="/reset">Reset Database</a>
+        </nav>
+
+        <button type="submit" class="resetButton">
+            <img src="/icons/reset.svg" alt="Reset"/>
+            <p class="hidden">Reset Database</p>
+        </button>
+    </div>
 </header>
 
 <!-- Main Content -->
