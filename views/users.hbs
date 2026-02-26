@@ -51,7 +51,19 @@ Original work. No AI or external resources were used.
                         <td>{{this.userID}}</td>
                         <td>{{this.username}}</td>
                         <td>{{this.email}}</td>
-                        <td></td>
+                        <td>
+                            <div class="buttonContainer">
+                                <button type="button" class="editButton">
+                                    <img src="/icons/edit.svg" alt="Edit"/>
+                                </button>
+                                <form id="deleteUserForm" method='POST' action='/users/delete'>
+                                    <input type="hidden" value="{{this.userID}}" name="delete_userID">
+                                    <button type="submit" class="deleteButton">
+                                        <img src="/icons/delete.svg" alt="Delete"/>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                 {{/each}}
                 {{!-- <tr class = "InsertUser">
@@ -75,9 +87,9 @@ Original work. No AI or external resources were used.
         </table>
     </div>
 
-    <div class="tableBox hidden" id="addUserForm" method='POST' action='/users/insert'>
+    <div class="tableBox hidden">
         <h2 class="formName">Add User</h2>
-        <form class="form">
+        <form class="form" id="addUserForm" method='POST' action='/users/insert'>
             <label>Username:
                 <input class="textBox" type="text" name="username">
             </label><br>
@@ -96,9 +108,9 @@ Original work. No AI or external resources were used.
         </form>
     </div>
 
-    <div class="tableBox hidden" id="updateUserForm" method='POST' action='/users/update'>
+    <div class="tableBox hidden">
         <h2 class="formName">Update User</h2>
-        <form class="form">
+        <form class="form" id="updateUserForm" method='POST' action='/users/update'>
             <label>User ID:
                 <input class="textBox" type="number" name="userID">
             </label><br>
