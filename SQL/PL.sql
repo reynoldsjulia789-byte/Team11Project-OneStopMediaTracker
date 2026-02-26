@@ -269,8 +269,8 @@ drop procedure if exists sp_insertUser;
 delimiter //
 create procedure sp_insertUser
 (
-    in  p_username    varchar(255) not null unique,
-    in  p_email       varchar(255) not null unique,
+    in  p_username    varchar(255),
+    in  p_email       varchar(255),
     out p_userID      int
 )
 begin
@@ -291,14 +291,14 @@ end //
 delimiter ;
 
 -- Update User
-drop procedure if exists sp_updateUser
+drop procedure if exists sp_updateUser;
 
 delimiter //
 create procedure sp_updateUser
 (
-    in p_userID     int not null,
-    in p_username   varchar(255) not null unique,
-    in p_email      varchar(255) not null unique,
+    in p_userID     int,
+    in p_username   varchar(255),
+    in p_email      varchar(255)
 )
 begin
     update  Users
@@ -309,12 +309,12 @@ end //
 delimiter ;
 
 -- Delete User
-drop procedure if exists sp_deleteUser
+drop procedure if exists sp_deleteUser;
 
 delimiter //
 create procedure sp_deleteUser
 (
-    in p_userID     int not null
+    in p_userID     int
 )
 begin
     declare error_message varchar(255);
@@ -361,10 +361,10 @@ drop procedure if exists sp_insertSportsEvent;
 delimiter //
 create procedure sp_insertSportsEvent
 (
-    in  p_typeOfSport          VARCHAR(255) NOT NULL,
-    in  p_homeTeam             VARCHAR(255) NOT NULL,
-    in  p_awayTeam             VARCHAR(255) NOT NULL,
-    in  p_startTime            DATETIME NOT NULL,
+    in  p_typeOfSport          VARCHAR(255),
+    in  p_homeTeam             VARCHAR(255),
+    in  p_awayTeam             VARCHAR(255),
+    in  p_startTime            DATETIME,
     in  p_runtimeMins          INT,
     in  p_recordingIsAvailable BOOLEAN,
     in  p_platform             VARCHAR(255),
@@ -402,16 +402,16 @@ end //
 delimiter ;
 
 -- Update Sports Events
-drop procedure if exists sp_updateSportsEvents
+drop procedure if exists sp_updateSportsEvents;
 
 delimiter //
 create procedure sp_updateSportsEvents
 (
-    in  p_sportsEventID        int not null,
-    in  p_typeOfSport          VARCHAR(255) NOT NULL,
-    in  p_homeTeam             VARCHAR(255) NOT NULL,
-    in  p_awayTeam             VARCHAR(255) NOT NULL,
-    in  p_startTime            DATETIME NOT NULL,
+    in  p_sportsEventID        int,
+    in  p_typeOfSport          VARCHAR(255),
+    in  p_homeTeam             VARCHAR(255),
+    in  p_awayTeam             VARCHAR(255),
+    in  p_startTime            DATETIME,
     in  p_runtimeMins          INT,
     in  p_recordingIsAvailable BOOLEAN,
     in  p_platform             VARCHAR(255)
@@ -430,12 +430,12 @@ end //
 delimiter ;
 
 -- Delete Sports Event
-drop procedure if exists sp_deleteSportsEvent
+drop procedure if exists sp_deleteSportsEvent;
 
 delimiter //
 create procedure sp_deleteSportsEvent
 (
-    in p_sportsEventID     int not null
+    in p_sportsEventID     int
 )
 begin
     declare error_message varchar(255);
@@ -482,8 +482,8 @@ drop procedure if exists sp_insertMediaItem;
 delimiter //
 create procedure sp_insertMediaItem
 (
-    in  p_mediaType           ENUM('MOVIE','SHOW','BOOK') NOT NULL,
-    in  p_title               VARCHAR(255) NOT NULL,
+    in  p_mediaType           ENUM('MOVIE','SHOW','BOOK'),
+    in  p_title               VARCHAR(255),
     in  p_releaseDate         DATETIME,
     in  p_runtimeMins         INT,
     in  p_creator             VARCHAR(255),
@@ -503,12 +503,12 @@ begin
     )
     values
     (
-        mediaType   = p_mediaType,  
-        title       = p_title,      
-        releaseDate = p_releaseDate,
-        runtimeMins = p_runtimeMins,
-        creator     = p_creator,    
-        platform    = p_platform
+        p_mediaType,  
+        p_title,      
+        p_releaseDate,
+        p_runtimeMins,
+        p_creator,    
+        p_platform
     );
 
     -- Store the ID of the last inserted row
@@ -520,18 +520,18 @@ end //
 delimiter ;
 
 -- Update Media Item
-drop procedure if exists sp_updateMediaItem
+drop procedure if exists sp_updateMediaItem;
 
 delimiter //
 create procedure sp_updateMediaItem
 (
-    in  p_mediaItemID     int not null,
-    in  p_mediaType       ENUM('MOVIE','SHOW','BOOK') NOT NULL,
-    in  p_title           VARCHAR(255) NOT NULL,
+    in  p_mediaItemID     int,
+    in  p_mediaType       ENUM('MOVIE','SHOW','BOOK'),
+    in  p_title           VARCHAR(255),
     in  p_releaseDate     DATETIME,
     in  p_runtimeMins     INT,
     in  p_creator         VARCHAR(255),
-    in  p_platform        VARCHAR(255),
+    in  p_platform        VARCHAR(255)
 )
 begin
     update  MediaItems
@@ -546,12 +546,12 @@ end //
 delimiter ;
 
 -- Delete Media Items
-drop procedure if exists sp_deleteMediaItem
+drop procedure if exists sp_deleteMediaItem;
 
 delimiter //
 create procedure sp_deleteMediaItem
 (
-    in p_mediaItemID      int not null
+    in p_mediaItemID      int
 )
 begin
     declare error_message varchar(255);
@@ -596,13 +596,13 @@ delimiter ;
 drop procedure if exists sp_insertTrackerEntry;
 
 delimiter //
-create procedure sp_insertTrackerEntry;
+create procedure sp_insertTrackerEntry
 (
-    in  p_userID        INT NOT NULL,
+    in  p_userID        INT,
     in  p_mediaItemID   INT,
     in  p_sportsEventID INT,
     in  p_status        ENUM('TO_WATCH','WATCHING','WATCHED'),
-    in  p_savedAt       DATETIME NOT NULL,
+    in  p_savedAt       DATETIME,
     in  p_completedAt   DATETIME,
     out p_entryID       int
 )
@@ -619,12 +619,12 @@ begin
     )
     values
     (
-        userID        = p_userID,  
-        mediaItemID   = p_mediaItemID,
-        sportsEventID = p_sportsEventID,
-        status        = p_status,
-        savedAt       = p_savedAt,
-        completedAt   = p_completedAt
+        p_userID,  
+        p_mediaItemID,
+        p_sportsEventID,
+        p_status,
+        p_savedAt,
+        p_completedAt
     );
 
     -- Store the ID of the last inserted row
@@ -636,17 +636,17 @@ end //
 delimiter ;
 
 -- Update Tracker Entry
-drop procedure if exists sp_updateTrackerEntry
+drop procedure if exists sp_updateTrackerEntry;
 
 delimiter //
 create procedure sp_updateTrackerEntry
 (
-    in  p_entryID       int not null,
-    in  p_userID        INT NOT NULL,
+    in  p_entryID       int,
+    in  p_userID        INT,
     in  p_mediaItemID   INT,
     in  p_sportsEventID INT,
     in  p_status        ENUM('TO_WATCH','WATCHING','WATCHED'),
-    in  p_savedAt       DATETIME NOT NULL,
+    in  p_savedAt       DATETIME,
     in  p_completedAt   DATETIME
 )
 begin
@@ -662,12 +662,12 @@ end //
 delimiter ;
 
 -- Delete Tracker Entrys
-drop procedure if exists sp_deleteTrackerEntry
+drop procedure if exists sp_deleteTrackerEntry;
 
 delimiter //
 create procedure sp_deleteTrackerEntry
 (
-    in p_entryID      int not null
+    in p_entryID      int
 )
 begin
     declare error_message varchar(255);
