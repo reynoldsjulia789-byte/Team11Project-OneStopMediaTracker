@@ -64,7 +64,7 @@ Original work. No AI or external resources were used.
         </table>
     </div>
 
-    <div class="tableBox hidden" id="addTrackerForm">
+    <div class="tableBox hidden" id="addTrackerForm" method='POST' action='/tracker-entries/insert'>
         <h2 class="formName">Add Tracker Entry</h2>
         <form class="form">
             <label>User ID:
@@ -101,7 +101,7 @@ Original work. No AI or external resources were used.
         </form>
     </div>
 
-    <div class="tableBox hidden" id="updateTrackerForm">
+    <div class="tableBox hidden" id="updateTrackerForm" method='POST' action='/tracker-entries/update'>
         <h2 class="formName">Update Tracker Entry</h2>
         <form class="form">
             <label>Entry ID:
