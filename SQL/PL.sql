@@ -640,20 +640,12 @@ delimiter //
 create procedure sp_updateTrackerEntry
 (
     in  p_entryID       int,
-    in  p_userID        INT,
-    in  p_mediaItemID   INT,
-    in  p_sportsEventID INT,
     in  p_status        ENUM('TO_WATCH','WATCHING','WATCHED'),
-    in  p_savedAt       DATETIME,
     in  p_completedAt   DATETIME
 )
 begin
-    update  MediaItems
-    set     userID        = p_userID,  
-            mediaItemID   = p_mediaItemID,
-            sportsEventID = p_sportsEventID,
-            status        = p_status,
-            savedAt       = p_savedAt,
+    update  UserTrackerEntries
+    set     status        = p_status,
             completedAt   = p_completedAt
     where   entryID       = p_entryID;
 end //

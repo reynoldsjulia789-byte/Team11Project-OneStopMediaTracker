@@ -355,7 +355,7 @@ app.post('/sports-events/update', async function (req, res)
         const query1 = 'CALL sp_updateSportsEvents(?, ?, ?, ?, ?, ?, ?, ?);';
 
         // get new row information
-        const query2 = 'SELECT * FROM Users WHERE sportsEventID = ?;';
+        const query2 = 'SELECT * FROM SportsEvents WHERE sportsEventID = ?;';
 
         // execute update stored procedure
         await db.query(query1,
@@ -420,7 +420,7 @@ app.post('/sports-events/delete', async function (req, res)
     } 
     catch (error)
     {
-        console.error('Error executing delete user:', error);
+        console.error('Error executing delete:', error);
         // Send a generic error message to the browser
         res.status(500).send
         (
@@ -483,7 +483,7 @@ app.post('/media-items/insert', async function (req, res)
     }
 });
 
-// update sports event
+// update media item
 app.post('/media-items/update', async function (req, res)
 {
     try
@@ -498,7 +498,7 @@ app.post('/media-items/update', async function (req, res)
         const query1 = 'CALL sp_updateMediaItem(?, ?, ?, ?, ?, ?, ?);';
 
         // get new row information
-        const query2 = 'SELECT * FROM Users WHERE mediaItemID = ?;';
+        const query2 = 'SELECT * FROM MediaItems WHERE mediaItemID = ?;';
 
         // execute update stored procedure
         await db.query(query1,
@@ -561,7 +561,142 @@ app.post('/media-items/delete', async function (req, res)
     } 
     catch (error)
     {
-        console.error('Error executing delete user:', error);
+        console.error('Error executing delete:', error);
+        // Send a generic error message to the browser
+        res.status(500).send
+        (
+            'An error occurred while deleting the user.'
+        );
+    }
+});
+
+/*
+   USER TRACKER ENTRIES PROCEDURES
+*/
+
+// insert user tracker entry
+app.post('/tracker-entries/insert', async function (req, res)
+{
+    try
+    {
+        // Parse frontend form information
+        let data = req.body;
+
+        // TODO: add data cleansing 
+        
+        // create query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_insertTrackerEntry(?, ?, ?, ?, ?, @new_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1,
+        [
+          data.username,  
+          data.trackedItem,      
+          data.status,
+          data.savedAt,
+          data.completedAt
+        ]);
+
+        console.log
+        (
+          `created tracker entry: +
+          entryid: ${rows.new_id}, +
+          username: ${data.username}, +
+          tracked item: ${data.trackedItem}, +
+          status: ${data.status}, +
+          savedAt: ${data.savedAt}, +
+          status: ${data.completedAt}`
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/tracker-entries');
+    } 
+    catch (error)
+    {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// update tracker entry
+app.post('/tracker-entries/update', async function (req, res)
+{
+    try
+    {
+        // Parse frontend form information
+        const data = req.body;
+
+        // TODO: add data verification/cleanse
+
+        // create query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = 'CALL sp_updateTrackerEntry(?, ?, ?);';
+
+        // get new row information
+        const query2 = 'SELECT * FROM UserTrackerEntries WHERE entryID = ?;';
+
+        // execute update stored procedure
+        await db.query(query1,
+        [
+          data.entryID,
+          data.status,  
+          data.completedAt
+        ]);
+        
+        // get updated data from database
+        const [[rows]] = await db.query(query2, [data.entryID]);
+
+        console.log
+        (
+          `updated entry: +
+          entryID: ${rows.entryID}, +
+          userID: ${rows.userID}, +
+          mediaItemID: ${rows.mediaItemID}, +
+          sportsEventID: ${rows.sportsEventID}, +
+          status: ${rows.status}, +
+          savedAt: ${rows.savedAt}, +
+          completedAT: ${rows.completedAt}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/tracker-entries');
+    }
+    catch (error)
+    {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send
+        (
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// delete tracker entry
+app.post('/tracker-entries/delete', async function (req, res)
+{
+    try
+    {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Create and execute our query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_deleteTrackerEntry(?);`;
+        await db.query(query1, [data.delete_entryID]);
+
+        console.log(`delete entry: ${data.delete_entryID} `);
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/tracker-entries');
+    } 
+    catch (error)
+    {
+        console.error('Error executing delete:', error);
         // Send a generic error message to the browser
         res.status(500).send
         (
