@@ -131,10 +131,13 @@ app.get('/tracker-entries', async (req, res) => {
 
 // reset database (calls stored procedure)
 app.get('/reset', async (req, res) => {
-  try {
+  try
+  {
     await db.query('CALL sp_reset_nextup();');
-    res.redirect('/index');
-  } catch (err) {
+    res.redirect('back');
+  } 
+  catch (err)
+  {
     console.error('RESET failed:', err);
     res.status(500).send('RESET failed. 😞 Check server console.');
   }
