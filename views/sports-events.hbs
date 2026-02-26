@@ -15,14 +15,20 @@ Original work. No AI or external resources were used.
       <h1 id="role">Admin</h1>
     </div>
 
-    <nav class="navbar">
-        <a class="navButton" href="/users">Users</a>
-        <a class="navButton" href="/tracker-entries">User Tracking</a>
-        <a class="navButton active" href="/sports-events">Sports</a>
-        <a class="navButton" href="/media-items">Other Media</a>
-        <a class="navButton" href="/demo-delete">Delete (Test)</a>
-        <a class="navButton" href="/reset">Reset Database</a>
-    </nav>
+    <div class="navbar">
+        <nav>
+            <a class="navButton" href="/users">Users</a>
+            <a class="navButton" href="/tracker-entries">User Tracking</a>
+            <a class="navButton active" href="/sports-events">Sports</a>
+            <a class="navButton" href="/media-items">Other Media</a>
+            <a class="navButton" href="/demo-delete">Delete (Test)</a>
+        </nav>
+
+        <a class="resetButton" href="/reset">
+            <img src="/icons/reset.svg" alt="Reset"/>
+            <p class="hidden">Reset Database</p>
+        </a>
+    </div>
 </header>
 
 <!-- Main Content -->
@@ -61,7 +67,19 @@ Original work. No AI or external resources were used.
                 <td>{{this.runtimeMins}}</td>
                 <td>{{this.recordingIsAvailable}}</td>
                 <td>{{this.platform}}</td>
-                <td></td>
+                <td>
+                    <div class="buttonContainer">
+                        <button type="button" class="editButton">
+                            <img src="/icons/edit.svg" alt="Edit"/>
+                        </button>
+                        <form id="deleteSportsForm" method='POST' action='/sports-events/delete'>
+                            <input type="hidden" value="{{this.sportsEventID}}" name="delete_userID">
+                            <button type="submit" class="deleteButton">
+                                <img src="/icons/delete.svg" alt="Delete"/>
+                            </button>
+                        </form>
+                    </div>
+                </td>
                 </tr>
             {{/each}}
         </tbody>
