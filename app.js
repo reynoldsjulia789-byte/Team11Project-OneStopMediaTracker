@@ -131,7 +131,7 @@ app.get('/tracker-entries', async (req, res) => {
 app.get('/reset', async (req, res) => {
   try {
     await db.query('CALL sp_reset_nextup();');
-    res.redirect('/users');
+    res.redirect('/index');
   } catch (err) {
     console.error('RESET failed:', err);
     res.status(500).send('RESET failed. 😞 Check server console.');
@@ -148,6 +148,10 @@ app.get('/demo-delete', async (req, res) => {
     return res.status(500).send('Demo delete failed.');
   }
 });
+
+/*
+   USER PROCEDURES
+*/
 
 // insert user
 app.post('/users/insert', async function (req, res)
@@ -268,6 +272,292 @@ app.post('/users/delete', async function (req, res)
 
         // Redirect the user to the updated webpage data
         res.redirect('/users');
+    } 
+    catch (error)
+    {
+        console.error('Error executing delete user:', error);
+        // Send a generic error message to the browser
+        res.status(500).send
+        (
+            'An error occurred while deleting the user.'
+        );
+    }
+});
+
+/*
+   SPORTS EVENTS PROCEDURES
+*/
+
+// insert event
+app.post('/sports-events/insert', async function (req, res)
+{
+    try
+    {
+        // Parse frontend form information
+        let data = req.body;
+
+        // TODO: add data cleansing 
+        
+        // create query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_insertSportsEvent(?, ?, ?, ?, ?, ?, ?, @new_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1,
+        [
+          data.typeOfSport,
+          data.homeTeam,
+          data.awayTeam,
+          data.startTime,
+          data.runtimeMins,
+          data.recordingIsAvailable,
+          data.platform
+        ]);
+
+        console.log
+        (
+          `created sports event: +
+          sportsEventID: ${rows.new_id}, +
+          type of sport: ${data.typeOfSport}, +
+          homeTeam: ${data.homeTeam}, +
+          awayTeam: ${data.awayTeam}, +
+          startTime: ${data.startTime}, +
+          runtime mins: ${data.runtimeMins}, +
+          recording?: ${data.recordingIsAvailable}, +
+          platform: ${data.platform}`
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/sports-events');
+    } 
+    catch (error)
+    {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// update sports event
+app.post('/sports-events/update', async function (req, res)
+{
+    try
+    {
+        // Parse frontend form information
+        const data = req.body;
+
+        // TODO: add data verification/cleanse
+
+        // create query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = 'CALL sp_updateSportsEvents(?, ?, ?, ?, ?, ?, ?, ?);';
+
+        // get new row information
+        const query2 = 'SELECT * FROM Users WHERE sportsEventID = ?;';
+
+        // execute update stored procedure
+        await db.query(query1,
+        [
+          data.sportsEventID,
+          data.typeOfSport,
+          data.homeTeam,
+          data.awayTeam,
+          data.startTime,
+          data.runtimeMins,
+          data.recordingIsAvailable,
+          data.platform
+        ]);
+        
+        // get updated data from database
+        const [[rows]] = await db.query(query2, [data.sportsEventID]);
+
+        console.log
+        (
+          `updated sports event: +
+          sportsEventID: ${data.sportsEventID}, +
+          type of sport: ${rows.typeOfSport}, +
+          homeTeam: ${rows.homeTeam}, +
+          awayTeam: ${rows.awayTeam}, +
+          startTime: ${rows.startTime}, +
+          runtime mins: ${rows.runtimeMins}, +
+          recording?: ${rows.recordingIsAvailable}, +
+          platform: ${rows.platform}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/sports-events');
+    }
+    catch (error)
+    {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send
+        (
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// delete sports event
+app.post('/sports-events/delete', async function (req, res)
+{
+    try
+    {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Create and execute our query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_deleteSportsEvent(?);`;
+        await db.query(query1, [data.delete_sportsEventID]);
+
+        console.log(`delete sportsEventID: ${data.delete_sportsEventID} `);
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/sports-events');
+    } 
+    catch (error)
+    {
+        console.error('Error executing delete user:', error);
+        // Send a generic error message to the browser
+        res.status(500).send
+        (
+            'An error occurred while deleting the user.'
+        );
+    }
+});
+
+/*
+   MEDIA ITEMS PROCEDURES
+*/
+
+// insert media item
+app.post('/media-items/insert', async function (req, res)
+{
+    try
+    {
+        // Parse frontend form information
+        let data = req.body;
+
+        // TODO: add data cleansing 
+        
+        // create query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_insertMediaItem(?, ?, ?, ?, ?, ?, @new_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1,
+        [
+          data.mediaType,  
+          data.title,      
+          data.releaseDate,
+          data.runtimeMins,
+          data.creator,    
+          data.platform
+        ]);
+
+        console.log
+        (
+          `created media item: +
+          mediaItemID: ${rows.new_id}, +
+          media type: ${data.mediaType}, +
+          title: ${data.title}, +
+          release date: ${data.releaseDate}, +
+          runtimeMins: ${data.runtimeMins}, +
+          creator: ${data.creator}, +
+          platform: ${data.platform}`
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/media-items');
+    } 
+    catch (error)
+    {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// update sports event
+app.post('/media-items/update', async function (req, res)
+{
+    try
+    {
+        // Parse frontend form information
+        const data = req.body;
+
+        // TODO: add data verification/cleanse
+
+        // create query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = 'CALL sp_updateMediaItem(?, ?, ?, ?, ?, ?, ?);';
+
+        // get new row information
+        const query2 = 'SELECT * FROM Users WHERE mediaItemID = ?;';
+
+        // execute update stored procedure
+        await db.query(query1,
+        [
+          data.mediaItemID,
+          data.mediaType,  
+          data.title,      
+          data.releaseDate,
+          data.runtimeMins,
+          data.creator,    
+          data.platform
+        ]);
+        
+        // get updated data from database
+        const [[rows]] = await db.query(query2, [data.mediaItemID]);
+
+        console.log
+        (
+          `updated media item: +
+          mediaItemID: ${rows.mediaItemID}, +
+          media type: ${rows.mediaType}, +
+          title: ${rows.title}, +
+          release date: ${rows.releaseDate}, +
+          runtimeMins: ${rows.runtimeMins}, +
+          creator: ${rows.creator}, +
+          platform: ${rows.platform}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/media-items');
+    }
+    catch (error)
+    {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send
+        (
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// delete media items
+app.post('/media-items/delete', async function (req, res)
+{
+    try
+    {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Create and execute our query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_deleteMediaItem(?);`;
+        await db.query(query1, [data.delete_mediaItemID]);
+
+        console.log(`delete mediaItemID: ${data.delete_mediaItemID} `);
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/media-items');
     } 
     catch (error)
     {
