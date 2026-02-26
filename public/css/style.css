@@ -180,7 +180,7 @@ nav
 {
     /* layout */
     display:                flex;
-    padding:                0px 10px;
+    padding:                5px 5px;
     justify-content:        center;
     align-items:            center;
     gap:                    8px;
@@ -188,7 +188,7 @@ nav
 
     /* style */
     border-radius:          8px;
-    border:                 none;
+    border:                 2px solid var(--Third-Lightest-Grey);
     background:             none;
 
     /* typography */
@@ -198,6 +198,7 @@ nav
     font-style:             normal;
     font-weight:            500;
     line-height:            normal;
+    text-decoration:        none;
 }
 
 .resetButton img, .resetButton svg
@@ -208,6 +209,8 @@ nav
 
 .resetButton:hover
 {
+    padding:    5px 10px;
+
     color:      var(--Third-Darkest-Grey);
     background: var(--WarningColor);
 }
