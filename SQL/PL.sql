@@ -8,7 +8,23 @@ File: PL.sql
 Contains stored procedures:
 - sp_reset_nextup
 - sp_demo_delete_user
-- sp_insert_user
+- Users:
+    - sp_insertUser
+    - sp_updateUser
+    - sp_deleteUser
+- Sports Events:
+    - sp_insertSportsEvent
+    - sp_updateSportsEvent
+    - sp_deleteSportsEvent
+- Media Items:
+    - sp_insertMediaItem
+    - sp_updateMediaItem
+    - sp_deleteMediaItem
+- User Tracker Entrys:
+    - sp_insertTrackerEntry
+    - sp_updateTrackerEntry
+    - sp_deleteTrackerEntry
+
 
 Original work. No AI used.
 CRUD procedures adapted from:
@@ -242,16 +258,16 @@ DELIMITER ;
     Users Table Procedures
 
     In this section:
-    - sp_insert_user
-    - sp_update_user
-    - sp_delete_user
+    - sp_insertUser
+    - sp_updateUser
+    - sp_deleteUser
 */
 
 -- Insert/Create New User
-drop procedure if exists sp_insert_user;
+drop procedure if exists sp_insertUser;
 
 delimiter //
-create procedure sp_insert_user
+create procedure sp_insertUser
 (
     in  p_username    varchar(255) not null unique,
     in  p_email       varchar(255) not null unique,
@@ -275,10 +291,10 @@ end //
 delimiter ;
 
 -- Update User
-drop procedure if exists sp_update_user
+drop procedure if exists sp_updateUser
 
 delimiter //
-create procedure sp_update_user
+create procedure sp_updateUser
 (
     in p_userID     int not null,
     in p_username   varchar(255) not null unique,
@@ -293,10 +309,10 @@ end //
 delimiter ;
 
 -- Delete User
-drop procedure if exists sp_delete_user
+drop procedure if exists sp_deleteUser
 
 delimiter //
-create procedure sp_delete_user
+create procedure sp_deleteUser
 (
     in p_userID     int not null
 )
@@ -334,16 +350,16 @@ delimiter ;
     Sports Events Table Procedures
 
     In this section:
-    - sp_insert_sports_event
-    - sp_update_sports_event
-    - sp_delete_sports_event
+    - sp_insertSportsEvent
+    - sp_updateSportsEvent
+    - sp_deleteSportsEvent
 */
 
 -- Insert/Create New Sports Event
-drop procedure if exists sp_insert_sports_event;
+drop procedure if exists sp_insertSportsEvent;
 
 delimiter //
-create procedure sp_insert_sports_event
+create procedure sp_insertSportsEvent
 (
     in  p_typeOfSport          VARCHAR(255) NOT NULL,
     in  p_homeTeam             VARCHAR(255) NOT NULL,
@@ -386,10 +402,10 @@ end //
 delimiter ;
 
 -- Update Sports Events
-drop procedure if exists sp_update_sports_events
+drop procedure if exists sp_updateSportsEvents
 
 delimiter //
-create procedure sp_update_sports_events
+create procedure sp_updateSportsEvents
 (
     in  p_sportsEventID        int not null,
     in  p_typeOfSport          VARCHAR(255) NOT NULL,
@@ -414,10 +430,10 @@ end //
 delimiter ;
 
 -- Delete Sports Event
-drop procedure if exists sp_delete_sports_event
+drop procedure if exists sp_deleteSportsEvent
 
 delimiter //
-create procedure sp_delete_sports_event
+create procedure sp_deleteSportsEvent
 (
     in p_sportsEventID     int not null
 )
@@ -440,7 +456,7 @@ begin
 
         -- number of rows affected by the preceding statement.
         if row_count() = 0 then
-            set error_message = concat('No matching record found in Users for userID: ', p_userID);
+            set error_message = concat('No matching record found in Sports Events for sportsEventID: ', p_sportsEventID);
             -- Trigger custom error, invoke exit handler
             signal sqlstate '45000' set message_text = error_message;
         end if;
@@ -455,16 +471,16 @@ delimiter ;
     Media Items Table Procedures
 
     In this section:
-    - sp_insert_media_item
-    - sp_update_media_item
-    - sp_delete_media_item
+    - sp_insertMediaItem
+    - sp_updateMediaItem
+    - sp_deleteMediaItem
 */
 
 -- Insert/Create New Media Item
-drop procedure if exists sp_insert_media_item;
+drop procedure if exists sp_insertMediaItem;
 
 delimiter //
-create procedure sp_insert_media_item
+create procedure sp_insertMediaItem
 (
     in  p_mediaType           ENUM('MOVIE','SHOW','BOOK') NOT NULL,
     in  p_title               VARCHAR(255) NOT NULL,
@@ -503,11 +519,11 @@ begin
 end //
 delimiter ;
 
--- Update User
-drop procedure if exists sp_update_media_item
+-- Update Media Item
+drop procedure if exists sp_updateMediaItem
 
 delimiter //
-create procedure sp_update_media_item
+create procedure sp_updateMediaItem
 (
     in  p_mediaItemID     int not null,
     in  p_mediaType       ENUM('MOVIE','SHOW','BOOK') NOT NULL,
@@ -529,11 +545,11 @@ begin
 end //
 delimiter ;
 
--- Delete User
-drop procedure if exists sp_delete_media_item
+-- Delete Media Items
+drop procedure if exists sp_deleteMediaItem
 
 delimiter //
-create procedure sp_delete_media_item
+create procedure sp_deleteMediaItem
 (
     in p_mediaItemID      int not null
 )
@@ -556,7 +572,7 @@ begin
 
         -- number of rows affected by the preceding statement.
         if row_count() = 0 then
-            set error_message = concat('No matching record found in Users for userID: ', p_userID);
+            set error_message = concat('No matching record found in Media Items for mediaItemID: ', p_mediaItemID);
             -- Trigger custom error, invoke exit handler
             signal sqlstate '45000' set message_text = error_message;
         end if;
@@ -571,7 +587,112 @@ delimiter ;
     User Tracker Entries Table Procedures
 
     In this section:
-    - sp_insert_tracker_entry
-    - sp_update_tracker_entry
-    - sp_delete_tracker_entry
+    - sp_insertTrackerEntry
+    - sp_updateTrackerEntry
+    - sp_deleteTrackerEntry
 */
+
+-- Insert/Create New Tracker Entry
+drop procedure if exists sp_insertTrackerEntry;
+
+delimiter //
+create procedure sp_insertTrackerEntry;
+(
+    in  p_userID        INT NOT NULL,
+    in  p_mediaItemID   INT,
+    in  p_sportsEventID INT,
+    in  p_status        ENUM('TO_WATCH','WATCHING','WATCHED'),
+    in  p_savedAt       DATETIME NOT NULL,
+    in  p_completedAt   DATETIME,
+    out p_entryID       int
+)
+begin
+    -- Insert data into Tracker Entrys table
+    insert into UserTrackerEntries
+    (
+        userID,       
+        mediaItemID,  
+        sportsEventID,
+        status,       
+        savedAt,      
+        completedAt     
+    )
+    values
+    (
+        userID        = p_userID,  
+        mediaItemID   = p_mediaItemID,
+        sportsEventID = p_sportsEventID,
+        status        = p_status,
+        savedAt       = p_savedAt,
+        completedAt   = p_completedAt
+    );
+
+    -- Store the ID of the last inserted row
+    select last_insert_id() into p_entryID;
+
+    -- Display the ID of the last inserted person.
+    select last_insert_id() AS 'newID';
+end //
+delimiter ;
+
+-- Update Tracker Entry
+drop procedure if exists sp_updateTrackerEntry
+
+delimiter //
+create procedure sp_updateTrackerEntry
+(
+    in  p_entryID       int not null,
+    in  p_userID        INT NOT NULL,
+    in  p_mediaItemID   INT,
+    in  p_sportsEventID INT,
+    in  p_status        ENUM('TO_WATCH','WATCHING','WATCHED'),
+    in  p_savedAt       DATETIME NOT NULL,
+    in  p_completedAt   DATETIME
+)
+begin
+    update  MediaItems
+    set     userID        = p_userID,  
+            mediaItemID   = p_mediaItemID,
+            sportsEventID = p_sportsEventID,
+            status        = p_status,
+            savedAt       = p_savedAt,
+            completedAt   = p_completedAt
+    where   entryID       = p_entryID;
+end //
+delimiter ;
+
+-- Delete Tracker Entrys
+drop procedure if exists sp_deleteTrackerEntry
+
+delimiter //
+create procedure sp_deleteTrackerEntry
+(
+    in p_entryID      int not null
+)
+begin
+    declare error_message varchar(255);
+
+    -- error handling
+    declare exit handler for sqlexception
+    begin
+        -- roll back the transaction on any error
+        rollback;
+        -- propogate the custom error message to the caller
+        resignal;
+    end;
+
+    start transaction;
+        -- delete the corresponding row from UserTrackerEntrys
+        delete from UserTrackerEntries
+        where       entryID = p_entryID;
+
+        -- number of rows affected by the preceding statement.
+        if row_count() = 0 then
+            set error_message = concat('No matching record found in User Tracker Entry for entryID: ', p_entryID);
+            -- Trigger custom error, invoke exit handler
+            signal sqlstate '45000' set message_text = error_message;
+        end if;
+
+    commit;
+end //
+delimiter ;
