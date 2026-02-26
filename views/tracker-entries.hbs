@@ -15,14 +15,20 @@ Original work. No AI or external resources were used.
       <h1 id="role">Admin</h1>
     </div>
 
-    <nav class="navbar">
-        <a class="navButton" href="/users">Users</a>
-        <a class="navButton active" href="/tracker-entries">User Tracking</a>
-        <a class="navButton" href="/sports-events">Sports</a>
-        <a class="navButton" href="/media-items">Other Media</a>
-        <a class="navButton" href="/demo-delete">Delete (Test)</a>
-        <a class="navButton" href="/reset">Reset Database</a>
-    </nav>
+    <div class="navbar">
+        <nav>
+            <a class="navButton" href="/users">Users</a>
+            <a class="navButton active" href="/tracker-entries">User Tracking</a>
+            <a class="navButton" href="/sports-events">Sports</a>
+            <a class="navButton" href="/media-items">Other Media</a>
+            <a class="navButton" href="/demo-delete">Delete (Test)</a>
+        </nav>
+
+        <a class="resetButton" href="/reset">
+            <img src="/icons/reset.svg" alt="Reset"/>
+            <p class="hidden">Reset Database</p>
+        </a>
+    </div>
 </header>
 
 <!-- Main Content -->
@@ -57,7 +63,19 @@ Original work. No AI or external resources were used.
                     <td>{{this.status}}</td>
                     <td>{{this.savedAt}}</td>
                     <td>{{this.completedAt}}</td>
-                    <td></td>
+                    <td>
+                        <div class="buttonContainer">
+                                <button type="button" class="editButton">
+                                    <img src="/icons/edit.svg" alt="Edit"/>
+                                </button>
+                                <form id="deleteTrackerForm" method='POST' action='/tracker-entries/delete'>
+                                    <input type="hidden" value="{{this.entryID}}" name="delete_entryID">
+                                    <button type="submit" class="deleteButton">
+                                        <img src="/icons/delete.svg" alt="Delete"/>
+                                    </button>
+                                </form>
+                        </div>
+                    </td>
                     </tr>
                 {{/each}}
             </tbody>
@@ -67,14 +85,11 @@ Original work. No AI or external resources were used.
     <div class="tableBox hidden" id="addTrackerForm" method='POST' action='/tracker-entries/insert'>
         <h2 class="formName">Add Tracker Entry</h2>
         <form class="form">
-            <label>User ID:
-                <input class="textBox" type="number" name="userID">
+            <label>User:
+                <input class="textBox" type="text" name="username">
             </label><br>
-            <label>Media Item ID (optional):
-                <input class="textBox" type="number" name="mediaItemID">
-            </label><br>
-            <label>Sports Event ID (optional):
-                <input class="textBox" type="number" name="sportsEventID">
+            <label>Tracked Item:
+                <input class="textBox" type="text" name="trackedItem">
             </label><br>
             <label>Status:
                 <select class="textBox" name="status">
