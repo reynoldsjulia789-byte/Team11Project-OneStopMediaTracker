@@ -598,9 +598,8 @@ drop procedure if exists sp_insertTrackerEntry;
 delimiter //
 create procedure sp_insertTrackerEntry
 (
-    in  p_userID        INT,
-    in  p_mediaItemID   INT,
-    in  p_sportsEventID INT,
+    in  p_username      varchar(255),
+    in  p_trackedItem   varchar(255),
     in  p_status        ENUM('TO_WATCH','WATCHING','WATCHED'),
     in  p_savedAt       DATETIME,
     in  p_completedAt   DATETIME,
@@ -619,9 +618,8 @@ begin
     )
     values
     (
-        p_userID,  
-        p_mediaItemID,
-        p_sportsEventID,
+        (select userID from Users where username = p_username),  
+        -- figure out how to insert mediaItemID and sportsEventID.....
         p_status,
         p_savedAt,
         p_completedAt
