@@ -6,7 +6,9 @@ Group 11: Julia Reynolds, Stephen Stanwood
 File: app.js
 Purpose: Set up a simple server + routes for viewing database via simple UI.
 
-Original work. No AI or external resources were used.
+Original work. No AI used.
+CRUD procedures adapted from:
+- CS340 Exploration - Implementing CUD operations in your app (https://canvas.oregonstate.edu/courses/2031764/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26243436)
 */
 
 
