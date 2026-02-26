@@ -149,6 +149,108 @@ app.get('/demo-delete', async (req, res) => {
   }
 });
 
+// insert user
+app.post('/users/insert', async function (req, res)
+{
+    try
+    {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Cleanse data
+        if (!data.email || !data.username)
+        {
+          // send bad request error
+          res.status(400).send
+          (
+            'please provide valid inputs'
+          );
+
+          return;
+        }
+
+        // create query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_insertUser(?, ?, @new_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1,
+        [
+          data.username,
+          data.email
+        ]);
+
+        console.log(`created user: userID: ${rows.new_id} username: ${data.username} ${data.email}`);
+
+        // Redirect the user to the updated webpage
+        res.redirect('/users');
+    } 
+    catch (error)
+    {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// update user
+app.post('/users/update', async function (req, res)
+{
+    try {
+        // Parse frontend form information
+        const data = req.body;
+
+        // Cleanse data
+        if (isNaN(parseInt(data.userID)) || !data.email || !data.username)
+        {
+          // send bad request error
+          res.status(400).send
+          (
+            'please provide valid inputs'
+          );
+
+          return;
+        }
+
+        // create query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = 'CALL sp_updateUser(?, ?, ?);';
+
+        // get new row information
+        const query2 = 'SELECT username, email FROM Users WHERE userID = ?;';
+
+        // execute update stored procedure
+        await db.query(query1,
+        [
+          data.userID,
+          data.username,
+          data.email
+        ]);
+        
+        // get updated data from database
+        const [[rows]] = await db.query(query2, [data.userID]);
+
+        console.log
+        (
+          `updated Users table, userID: ${data.userID} username: ${rows.username}, email: ${rows.email}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/users');
+    }
+    catch (error)
+    {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send
+        (
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
 // delete user
 app.post('/users/delete', async function (req, res)
 {
