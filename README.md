@@ -1,4 +1,4 @@
-# One Stop Media Tracker
+# NextUp: One Stop Media Tracker
 Course Project for CS 340 - Intro to Databases\
 Team 11
 
