@@ -598,28 +598,37 @@ drop procedure if exists sp_insertTrackerEntry;
 delimiter //
 create procedure sp_insertTrackerEntry
 (
-    in  p_username      varchar(255),
-    in  p_trackedItem   varchar(255),
+    in  p_userID        int,
+    in  p_mediaItemID   int,
+    in  p_sportsEventID int,
     in  p_status        ENUM('TO_WATCH','WATCHING','WATCHED'),
     in  p_savedAt       DATETIME,
     in  p_completedAt   DATETIME,
     out p_entryID       int
 )
 begin
-    -- Insert data into Tracker Entrys table
+    -- ensure exactly one of mediaItemID or sportsEventID is provided
+    if (p_mediaItemID is not null and p_sportsEventID is not null)
+        or (p_mediaItemID is null and p_sportsEventID is null) then
+        signal sqlstate '45000'
+            set message_text = 'Must provide exactly one of mediaItemID or sportsEventID';
+    end if;
+
+    -- Insert data into User Tracker Entries table
     insert into UserTrackerEntries
     (
-        userID,       
-        mediaItemID,  
+        userID,
+        mediaItemID,
         sportsEventID,
-        status,       
-        savedAt,      
-        completedAt     
+        status,
+        savedAt,
+        completedAt
     )
     values
     (
-        (select userID from Users where username = p_username),  
-        -- figure out how to insert mediaItemID and sportsEventID.....
+        p_userID,
+        p_mediaItemID,
+        p_sportsEventID,
         p_status,
         p_savedAt,
         p_completedAt

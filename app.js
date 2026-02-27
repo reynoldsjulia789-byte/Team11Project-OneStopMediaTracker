@@ -104,7 +104,7 @@ app.get('/sports-events', async (req, res) => {
 // now includes date formatting to make the timestamps easier to read
 app.get('/tracker-entries', async (req, res) => {
   try {
-    const query = `
+    const entriesQuery = `
       SELECT
         ute.entryID,
         u.username AS user,
@@ -121,8 +121,36 @@ app.get('/tracker-entries', async (req, res) => {
       LEFT JOIN SportsEvents se ON ute.sportsEventID = se.sportsEventID
       ORDER BY ute.entryID;
     `;
-    const [rows] = await db.query(query);
-    res.render('tracker-entries', { data: rows });
+
+    const usersQuery = `SELECT userID, username FROM Users ORDER BY username;`;
+    
+    const trackedItemsQuery = `
+      SELECT
+        CONCAT('media:', mediaItemID) AS value,
+        title AS label
+      FROM MediaItems
+
+      UNION ALL
+
+      SELECT
+        CONCAT('sport:', sportsEventID) AS value,
+        CONCAT(awayTeam, ' @ ', homeTeam) AS label
+      FROM SportsEvents
+
+      ORDER BY label;
+    `;
+
+    const [entries] = await db.query(entriesQuery);
+    
+    // pull users and tracked items for the dropdowns in the "insert new entry" form
+    const [users] = await db.query(usersQuery);
+    const [trackedItems] = await db.query(trackedItemsQuery);
+
+    res.render('tracker-entries', {
+      data: entries,
+      users,
+      trackedItems
+    });
   } catch (err) {
     console.error('DB error on /tracker-entries:', err);
     res.status(500).send('Database error');
@@ -585,43 +613,113 @@ app.post('/tracker-entries/insert', async function (req, res)
     try
     {
         // Parse frontend form information
-        let data = req.body;
+        const data = req.body;
 
-        // TODO: add data cleansing 
-        
-        // create query
+        // Cleanse / normalize data
+        const userID = parseInt(data.userID);
+
+        // Single dropdown selection (format: "MEDIA:3" or "SPORT:2")
+        const trackedSelection = (data.trackedItem && data.trackedItem !== '')
+            ? data.trackedItem
+            : null;
+
+        let mediaItemID = null;
+        let sportsEventID = null;
+
+        // Validate required fields
+        if (isNaN(userID))
+        {
+            res.status(400).send('please provide a valid user');
+            return;
+        }
+
+        if (!trackedSelection)
+        {
+            res.status(400).send('please select a tracked item');
+            return;
+        }
+
+        // Parse trackedSelection into the correct FK
+        // Expected format: "<TYPE>:<ID>" where TYPE is "MEDIA" or "SPORT"
+        const parts = trackedSelection.split(':');
+
+        if (parts.length !== 2)
+        {
+            res.status(400).send('please select a valid tracked item');
+            return;
+        }
+
+        const trackedType = parts[0];
+        const trackedID = parseInt(parts[1]);
+
+
+        console.log('trackedItem raw value:', data.trackedItem);
+
+        if (isNaN(trackedID))
+        {
+            res.status(400).send('please select a valid tracked item');
+            return;
+        }
+
+        if (trackedType === 'media')
+        {
+            mediaItemID = trackedID;
+        }
+        else if (trackedType === 'sport')
+        {
+            sportsEventID = trackedID;
+        }
+        else
+        {
+            res.status(400).send('please select a valid tracked item');
+            return;
+        }
+
+        // Normalize datetime-local (YYYY-MM-DDTHH:MM) -> MySQL DATETIME (YYYY-MM-DD HH:MM:SS)
+        const savedAt = (data.savedAt && data.savedAt !== '')
+            ? data.savedAt.replace('T', ' ') + ':00'
+            : null;
+
+        const completedAt = (data.completedAt && data.completedAt !== '')
+            ? data.completedAt.replace('T', ' ') + ':00'
+            : null;
+
+        // Create and execute our query
         // Using parameterized queries (Prevents SQL injection attacks)
-        const query1 = `CALL sp_insertTrackerEntry(?, ?, ?, ?, ?, @new_id);`;
+        // SP signature: (userID, mediaItemID, sportsEventID, status, savedAt, completedAt, OUT new_id)
+        const query1 = `CALL sp_insertTrackerEntry(?, ?, ?, ?, ?, ?, @new_id);`;
 
-        // Store ID of last inserted row
-        const [[[rows]]] = await db.query(query1,
+        const [[rows]] = await db.query(query1,
         [
-          data.username,  
-          data.trackedItem,      
-          data.status,
-          data.savedAt,
-          data.completedAt
+            userID,
+            mediaItemID,
+            sportsEventID,
+            data.status,
+            savedAt,
+            completedAt
         ]);
 
         console.log
         (
-          `created tracker entry: +
-          entryid: ${rows.new_id}, +
-          username: ${data.username}, +
-          tracked item: ${data.trackedItem}, +
-          status: ${data.status}, +
-          savedAt: ${data.savedAt}, +
-          status: ${data.completedAt}`
+            `created tracker entry: ` +
+            `entryID: ${rows[0].newID}, ` +
+            `userID: ${userID}, ` +
+            `mediaItemID: ${mediaItemID}, ` +
+            `sportsEventID: ${sportsEventID}, ` +
+            `status: ${data.status}, ` +
+            `savedAt: ${savedAt}, ` +
+            `completedAt: ${completedAt}`
         );
 
         // Redirect the user to the updated webpage
         res.redirect('/tracker-entries');
-    } 
+    }
     catch (error)
     {
         console.error('Error executing queries:', error);
         // Send a generic error message to the browser
-        res.status(500).send(
+        res.status(500).send
+        (
             'An error occurred while executing the database queries.'
         );
     }
@@ -634,8 +732,6 @@ app.post('/tracker-entries/update', async function (req, res)
     {
         // Parse frontend form information
         const data = req.body;
-
-        // TODO: add data verification/cleanse
 
         // create query
         // Using parameterized queries (Prevents SQL injection attacks)
