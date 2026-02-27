@@ -25,7 +25,7 @@ const exphbs = require('express-handlebars');
 const db = require('./database/db-connector');
 
 const app = express();
-const PORT = 9132;
+const PORT = 9130;
 
 // set up Handlebars for templating
 app.engine('.hbs', exphbs.engine({ extname: '.hbs' }));
