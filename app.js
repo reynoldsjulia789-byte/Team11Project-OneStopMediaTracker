@@ -25,7 +25,7 @@ const exphbs = require('express-handlebars');
 const db = require('./database/db-connector');
 
 const app = express();
-const PORT = 9130;
+const PORT = 9132;
 
 // set up Handlebars for templating
 app.engine('.hbs', exphbs.engine({ extname: '.hbs' }));
@@ -134,7 +134,7 @@ app.get('/reset', async (req, res) => {
   try
   {
     await db.query('CALL sp_reset_nextup();');
-    res.redirect('/users');
+    res.redirect('/index');
   } 
   catch (err)
   {
