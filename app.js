@@ -134,7 +134,7 @@ app.get('/reset', async (req, res) => {
   try
   {
     await db.query('CALL sp_reset_nextup();');
-    res.redirect('/index');
+    res.redirect('/');
   } 
   catch (err)
   {
