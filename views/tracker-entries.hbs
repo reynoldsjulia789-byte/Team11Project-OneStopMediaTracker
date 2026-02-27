@@ -65,7 +65,7 @@ Original work. No AI or external resources were used.
                     <td>{{this.completedAt}}</td>
                     <td>
                         <div class="buttonContainer">
-                                <button type="button" class="editButton">
+                                <button type="button" class="editButton" data-editTarget="updateTrackerForm">
                                     <img src="/icons/edit.svg" alt="Edit"/>
                                 </button>
                                 <form id="deleteTrackerForm" method='POST' action='/tracker-entries/delete'>
@@ -82,9 +82,9 @@ Original work. No AI or external resources were used.
         </table>
     </div>
 
-    <div class="tableBox hidden" id="addTrackerForm" method='POST' action='/tracker-entries/insert'>
+    <div class="tableBox hidden" id="addTrackerForm">
         <h2 class="formName">Add Tracker Entry</h2>
-        <form class="form">
+        <form class="form" method='POST' action='/tracker-entries/insert'>
             <label>User:
                 <input class="textBox" type="text" name="username">
             </label><br>
@@ -116,9 +116,9 @@ Original work. No AI or external resources were used.
         </form>
     </div>
 
-    <div class="tableBox hidden" id="updateTrackerForm" method='POST' action='/tracker-entries/update'>
+    <div class="tableBox hidden" id="updateTrackerForm">
         <h2 class="formName">Update Tracker Entry</h2>
-        <form class="form">
+        <form class="form" method='POST' action='/tracker-entries/update'>
             <label>Entry ID:
                 <input class="textBox" type="number" name="entryID">
             </label><br>

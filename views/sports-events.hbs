@@ -69,7 +69,7 @@ Original work. No AI or external resources were used.
                 <td>{{this.platform}}</td>
                 <td>
                     <div class="buttonContainer">
-                        <button type="button" class="editButton">
+                        <button type="button" class="editButton" data-editTarget="updateSportsForm">
                             <img src="/icons/edit.svg" alt="Edit"/>
                         </button>
                         <form id="deleteSportsForm" method='POST' action='/sports-events/delete'>
@@ -86,9 +86,9 @@ Original work. No AI or external resources were used.
         </table>
     </div>
 
-    <div class="tableBox hidden" id="addSportsForm" method='POST' action='/sports-events/insert'>
+    <div class="tableBox hidden" id="addSportsForm">
         <h2 class="formName">Add Sports Event</h2>
-        <form class="form">
+        <form class="form" method='POST' action='/sports-events/insert'>
             <label>Type of Sport:
                 <input class="textBox" type="text" name="typeOfSport">
             </label><br>
@@ -125,9 +125,9 @@ Original work. No AI or external resources were used.
         </form>
     </div>
 
-    <div class="tableBox hidden" id="updateSportsForm" method='POST' action='/sports-events/update'>
+    <div class="tableBox hidden" id="updateSportsForm">
         <h2 class="formName">Update Sports Event</h2>
-        <form class="form">
+        <form class="form" method='POST' action='/sports-events/update'>
             <label>Sports Event ID:
                 <input class="textBox" type="number" name="sportsEventID">
             </label><br>
