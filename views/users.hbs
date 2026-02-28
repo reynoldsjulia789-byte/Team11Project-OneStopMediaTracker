@@ -33,6 +33,7 @@ Original work. No AI or external resources were used.
 <!-- Main Content -->
 <main class="mainView">
 
+    {{!-- Table --}}
     <div class="tableBox">
         <h1 class="tableName">Users</h1>
 
@@ -71,27 +72,11 @@ Original work. No AI or external resources were used.
                         </td>
                     </tr>
                 {{/each}}
-                {{!-- <tr class = "InsertUser">
-                    <form>
-                        <td>new</td>
-                        <td>
-                            <input class="textBox" type="text" name="username">
-                        </td>
-                        <td>
-                            <input class="textBox" type="email" name="email">
-                        </td>
-                        <td>
-                            <button type="submit" class="doneButton">
-                                <img src="/icons/check.svg" alt="Done"/>
-                                done
-                            </button>
-                        </td>
-                    </form>
-                </tr> --}}
             </tbody>
         </table>
     </div>
 
+    {{!-- Add User Form --}}
     <div class="tableBox hidden" id="addUserForm">
         <h2 class="formName">Add User</h2>
         <form class="form" method='POST' action='/users/insert'>
@@ -113,6 +98,7 @@ Original work. No AI or external resources were used.
         </form>
     </div>
 
+    {{!-- Update User Form --}}
     <div class="tableBox hidden" id="updateUserForm">
         <h2 class="formName">Update User</h2>
         <form class="form" method='POST' action='/users/update'>
@@ -136,13 +122,5 @@ Original work. No AI or external resources were used.
             </div>
         </form>
     </div>
-
-        {{!-- <h2 class="formName">Delete User (DELETE)</h2>
-            <form class="form">
-            <label>User ID:
-                <input class="textBox" type="number" name="userID">
-            </label><br>
-            <button type="submit">Delete User</button>
-        </form> --}}
 
 </main>

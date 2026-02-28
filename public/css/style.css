@@ -38,8 +38,9 @@
     --Second-Smallest-Font-Size:    12px;
     --Third-Smallest-Font-Size:     14px;
     --Medium-Font-Size:             16px;
-    --Third-Largest-Font-Size:      20px;
-    --Second-Largest-Font-Size:     24px;
+    --Fourth-Largest-Font-Size:     20px;
+    --Third-Largest-Font-Size:      24px;
+    --Second-Largest-Font-Size:     32px;
     --Largest-Font-Size:            48px;
 
     /* Font */
@@ -91,7 +92,7 @@ body
 #siteName
 {
     color:              var(--Lightest-Grey);
-    font-size:          var(--Third-Largest-Font-Size);
+    font-size:          var(--Fourth-Largest-Font-Size);
     font-style:         normal;
     font-weight:        400;
     line-height:        1;
@@ -101,7 +102,7 @@ body
 #role
 {
     color:          var(--Color3);
-    font-size:      var(--Third-Largest-Font-Size);
+    font-size:      var(--Fourth-Largest-Font-Size);
     font-style:     normal;
     font-weight:    400;
     line-height:    1;
@@ -183,7 +184,7 @@ nav
     padding:         0px 10px;
     justify-content: center;
     align-items:     center;
-    gap:             8px;
+    gap:             5px;
     
     /* style */
     /* border:         1px solid var(--Third-Lightest-Grey); */
@@ -244,13 +245,18 @@ main
     align-self:         stretch;
 }
 
-p.startPage
+.startPage
 {
-    /* color:              var(--Third-Lightest-Grey); */
-    font-size:          var(--Second-Largest-Font-Size);
-    font-style:         normal;
+    color:              var(--Third-Lightest-Grey);
+    font-size:          var(--Third-Largest-Font-Size);
     font-weight:        300;
-    line-height:        normal;
+    margin:             0;
+}
+
+.startPageHeader
+{
+    font-size:          var(--Second-Largest-Font-Size);
+    font-weight:        400;
 }
 
 /* Table Styles */
@@ -289,7 +295,7 @@ th
 
     /* typography */
     color:          var(--Lightest-Grey);
-    font-size:      var(--Third-Largest-Font-Size);
+    font-size:      var(--Fourth-Largest-Font-Size);
     font-style:     normal;
     font-weight:    500;
     line-height:    normal;
@@ -357,7 +363,7 @@ td
 
     /* typography */
     color:          var(--Fourth-Darkest-Grey);
-    font-size:      var(--Second-Largest-Font-Size);
+    font-size:      var(--Third-Largest-Font-Size);
     font-style:     normal;
     font-weight:    300;
     line-height:    normal;

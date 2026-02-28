@@ -33,6 +33,7 @@ Original work. No AI or external resources were used.
 <!-- Main Content -->
 <main class="mainView">
 
+    {{!-- Table --}}
     <div class="tableBox">
         <h1 class="tableName">All Tracking Entries</h1>
 
@@ -81,6 +82,7 @@ Original work. No AI or external resources were used.
         </table>
     </div>
 
+{{!-- Add Entry Form --}}
     <div class="tableBox hidden" id="addTrackerForm">
         <h2 class="formName">Add Tracker Entry</h2>
         <form class="form" method='POST' action='/tracker-entries/insert'>
@@ -125,6 +127,7 @@ Original work. No AI or external resources were used.
         </form>
     </div>
 
+    {{!-- Update Entry Form --}}
     <div class="tableBox hidden" id="updateTrackerForm">
         <h2 class="formName">Update Tracker Entry</h2>
         <form class="form" method='POST' action='/tracker-entries/update'>
@@ -152,14 +155,5 @@ Original work. No AI or external resources were used.
             </div>
         </form>
     </div>
-
-<!--
-<h2>Delete Tracker Entry (DELETE)</h2>
-<form>
-    <label>Entry ID:
-        <input type="number" name="entryID">
-    </label><br>
-    <button type="submit">Delete Tracker Entry</button>
-</form> -->
 
 </main>

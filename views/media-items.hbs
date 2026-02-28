@@ -33,6 +33,7 @@ Original work. No AI or external resources were used.
 <!-- Main Content -->
 <main class="mainView">
 
+    {{!-- Table --}}
     <div class="tableBox">
         <h1 class="tableName">Media Items</h1>
 
@@ -83,6 +84,7 @@ Original work. No AI or external resources were used.
         </table>
     </div>
 
+{{!-- Add Media Form --}}
     <div class="tableBox hidden" id="addMediaForm">
         <h2 class="formName">Add Media Item</h2>
         <form class="form" method='POST' action='/media-items/insert'>
@@ -120,6 +122,7 @@ Original work. No AI or external resources were used.
         </form>
     </div>
 
+    {{!-- Update Media Form --}}
     <div class="tableBox hidden" id="updateMediaForm">
         <h2 class="formName">Update Media Item</h2>
         <form class="form" method='POST' action='/media-items/update'>
@@ -159,14 +162,5 @@ Original work. No AI or external resources were used.
             </div>
         </form>
     </div>
-
-    <!--
-    <h2>Delete Media Item (DELETE)</h2>
-    <form>
-        <label>Media Item ID:
-            <input type="number" name="mediaItemID">
-        </label><br>
-        <button type="submit">Delete Media Item</button>
-    </form> -->
-
+    
 </main>
