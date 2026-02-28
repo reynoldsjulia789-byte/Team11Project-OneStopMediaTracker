@@ -178,15 +178,19 @@ nav
 /* Reset Button */
 .resetButton
 {
-    display:        flex;
-    align-items:    center;
-    gap:            8px;
-    padding:        0px 10px;
-
-    border:         none;
+    /* layout */
+    display:         flex;
+    padding:         0px 10px;
+    justify-content: center;
+    align-items:     center;
+    gap:             8px;
+    
+    /* style */
+    border:         1px solid var(--Third-Lightest-Grey);
     border-radius:  8px;
     background:     none;
 
+    /* typography */
     color:          var(--Third-Lightest-Grey);
     font-family:    var(--Font);
     font-size:      var(--Third-Smallest-Font-Size);
@@ -201,10 +205,24 @@ nav
     height: var(--Third-Smallest-Font-Size);
 }
 
+.resetButton p
+{
+    /* remove the default spacing from p text in the button */
+    margin:  0;
+    padding: 0;
+}
+
 .resetButton:hover
 {
+    border:     none;
     background: var(--WarningColor);
     color:      var(--Third-Darkest-Grey);
+}
+
+.resetButton:hover img, .resetButton:hover svg
+{ 
+    filter:     brightness(25%);
+    display:    inline;
 }
 
 /* Expand reset button by default (so our grader sees it) */
