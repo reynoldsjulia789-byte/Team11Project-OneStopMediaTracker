@@ -133,9 +133,9 @@ BEGIN
             'BOOK',
             'The World According to Garp',
             '1978-03-01 00:00:00',
-            null,
+            544,
             'John Irving',
-            null
+            'Print'
         );
 
     insert into SportsEvents
