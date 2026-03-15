@@ -107,11 +107,14 @@ app.get('/tracker-entries', async (req, res) => {
     const entriesQuery = `
       SELECT
         ute.entryID,
+        ute.userID AS userID,
         u.username AS user,
         COALESCE(
           mi.title,
           CONCAT(se.awayTeam, ' @ ', se.homeTeam)
         ) AS trackedItem,
+        ute.mediaItemID,
+        ute.sportsEventID,
         ute.status,
         DATE_FORMAT(ute.savedAt, '%b %e, %Y %h:%i %p') AS savedAt,
         DATE_FORMAT(ute.completedAt, '%b %e, %Y %h:%i %p') AS completedAt
@@ -725,7 +728,7 @@ app.post('/tracker-entries/insert', async function (req, res)
     }
 });
 
-// update tracker entry
+/// update tracker entry
 app.post('/tracker-entries/update', async function (req, res)
 {
     try
@@ -733,9 +736,18 @@ app.post('/tracker-entries/update', async function (req, res)
         // Parse frontend form information
         const data = req.body;
 
+        // Parse trackedItem selection (format: "media:3" or "sport:2")
+        let mediaItemID = null;
+        let sportsEventID = null;
+        const parts = data.trackedItem ? data.trackedItem.split(':') : [];
+        if (parts.length === 2) {
+            if (parts[0] === 'media') mediaItemID = parseInt(parts[1]);
+            else if (parts[0] === 'sport') sportsEventID = parseInt(parts[1]);
+        }
+
         // create query
         // Using parameterized queries (Prevents SQL injection attacks)
-        const query1 = 'CALL sp_updateTrackerEntry(?, ?, ?);';
+        const query1 = 'CALL sp_updateTrackerEntry(?, ?, ?, ?, ?, ?);';
 
         // get new row information
         const query2 = 'SELECT * FROM UserTrackerEntries WHERE entryID = ?;';
@@ -744,8 +756,11 @@ app.post('/tracker-entries/update', async function (req, res)
         await db.query(query1,
         [
           data.entryID,
-          data.status,  
-          data.completedAt
+          parseInt(data.userID),
+          mediaItemID,
+          sportsEventID,
+          data.status,
+          data.completedAt || null
         ]);
         
         // get updated data from database

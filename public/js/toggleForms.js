@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () =>
         updateUserForm:    { userID: 0, username: 1, email: 2 },
         updateMediaForm:   { mediaItemID: 0, mediaType: 1, title: 2, releaseDate: 3, runtimeMins: 4, creator: 5, platform: 6 },
         updateSportsForm:  { sportsEventID: 0, typeOfSport: 1, homeTeam: 2, awayTeam: 3, startTime: 4, runtimeMins: 5, recordingIsAvailable: 6, platform: 7 },
-        updateTrackerForm: { entryID: 0, status: 4, completedAt: 6 }
+        updateTrackerForm: { entryID: 0, status: 3, completedAt: 5 }
     };
 
     document.querySelectorAll('.editButton').forEach(btn => 
@@ -133,6 +133,26 @@ document.addEventListener('DOMContentLoaded', () =>
                             input.value = value;
                         }
                     });
+
+                    const trackedItemSelect = target.querySelector('[name="trackedItem"]');
+                    if (trackedItemSelect) {
+                        const mediaId = btn.dataset.mediaId;
+                        const sportId = btn.dataset.sportId;
+                        const val = mediaId && mediaId !== '' ? `media:${mediaId}` : `sport:${sportId}`;
+                        Array.from(trackedItemSelect.options).forEach(opt => {
+                            opt.selected = opt.value === val;
+                        });
+                    }
+
+                    const userSelect = target.querySelector('[name="userID"]');
+                    if (userSelect) {
+                        const userId = btn.dataset.userId;
+                        console.log('userId from data attr:', userId, typeof userId);
+                        console.log('option values:', Array.from(userSelect.options).map(o => o.value));
+                        Array.from(userSelect.options).forEach(opt => {
+                            opt.selected = opt.value === userId;
+                        });
+                    }
                 }
             }
 

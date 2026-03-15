@@ -65,12 +65,12 @@ Original work. No AI or external resources were used.
                     <td>{{this.completedAt}}</td>
                     <td>
                         <div class="buttonContainer">
-                                <button type="button" class="editButton" data-edit-target="updateTrackerForm" aria-expanded="false">
+                                <button type="button" class="editButton" data-edit-target="updateTrackerForm" aria-expanded="false" data-media-id="{{this.mediaItemID}}" data-sport-id="{{this.sportsEventID}}" data-user-id="{{this.userID}}">
                                     <img src="/icons/edit.svg" alt="Edit"/>
                                 </button>
                                 <form id="deleteTrackerForm" method='POST' action='/tracker-entries/delete'>
                                     <input type="hidden" value="{{this.entryID}}" name="delete_entryID">
-                                    <button type="submit" class="deleteButton">
+                                    <button type="submit" class="deleteButton" onclick="return confirm('Are you sure you want to delete this?')">
                                         <img src="/icons/delete.svg" alt="Delete"/>
                                     </button>
                                 </form>
@@ -129,21 +129,35 @@ Original work. No AI or external resources were used.
 
     {{!-- Update Entry Form --}}
     <div class="tableBox hidden" id="updateTrackerForm">
-        <h2 class="formName">Update Tracker Entry</h2>
-        <form class="form" method='POST' action='/tracker-entries/update'>
-            <label>Entry ID:
-                <input class="textBox" type="number" name="entryID">
-            </label><br>
-            <label>Status:
-                <select class="textBox" name="status">
-                    <option value="TO_WATCH">TO_WATCH</option>
-                    <option value="WATCHING">WATCHING</option>
-                    <option value="WATCHED">WATCHED</option>
-                </select>
-            </label><br>
-            <label>Completed At:
-                <input class="textBox" type="datetime-local" name="completedAt">
-            </label><br>
+    <h2 class="formName">Update Tracker Entry</h2>
+    <form class="form" method='POST' action='/tracker-entries/update'>
+        <input type="hidden" name="entryID">
+        <label>User:
+            <select class="textBox" name="userID">
+                <option value="">-- select user --</option>
+                {{#each users}}
+                <option value="{{this.userID}}">{{this.username}}</option>
+                {{/each}}
+            </select>
+        </label><br>
+        <label>Tracked Item:
+            <select class="textBox" name="trackedItem">
+                <option value="">-- select item --</option>
+                {{#each trackedItems}}
+                <option value="{{this.value}}">{{this.label}}</option>
+                {{/each}}
+            </select>
+        </label><br>
+        <label>Status:
+            <select class="textBox" name="status">
+                <option value="TO_WATCH">TO_WATCH</option>
+                <option value="WATCHING">WATCHING</option>
+                <option value="WATCHED">WATCHED</option>
+            </select>
+        </label><br>
+        <label>Completed At:
+            <input class="textBox" type="datetime-local" name="completedAt">
+        </label><br>
             <div class="buttonBox">
                 <button type="button" class="cancelButton">
                     cancel
